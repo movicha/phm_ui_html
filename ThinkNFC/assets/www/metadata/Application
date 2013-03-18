@@ -1,0 +1,26 @@
+{
+    "type": "application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "models": [
+            "Notes"
+        ],
+        "stores": [
+            "Notes"
+        ],
+        "views": [
+            "LoginForm",
+            "MainTabPanel"
+        ],
+        "name": "MyApp",
+        "controllers": [
+            "MyController"
+        ]
+    },
+    "id": "ExtBox1-ext-gen1580",
+    "designerId": "application"
+}
