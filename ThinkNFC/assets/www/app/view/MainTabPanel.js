@@ -180,6 +180,7 @@ Ext.define('MyApp.view.MainTabPanel', {
                                         items: [
                                             {
                                                 xtype: 'list',
+                                                hidden: true,
                                                 style: 'margin-top:5%;',
                                                 ui: 'round',
                                                 width: '100%',

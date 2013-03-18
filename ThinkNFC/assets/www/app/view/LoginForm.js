@@ -114,11 +114,26 @@ Ext.define('MyApp.view.LoginForm', {
         var paneltab = Ext.create('MyApp.view.MainTabPanel');
         Ext.getCmp('loginForm').destroy();
         Ext.Viewport.add(paneltab);
+        requestPosition();
        }
         else
        {
         	alert('Login failed');	
        } 	
+    	
+    	/*Ext.Ajax.request({
+    	    url: 'http://localhost:9000/login',
+    	    method: 'POST',
+
+    	    params: {
+    	        username: 'Ed',
+    	        password: Ext.getCmp('pass').getValue()
+    	    },
+
+    	    callback: function(options, success, response) {
+    	        console.log(response.responseText);
+    	    }
+    	});*/
 
     }
 

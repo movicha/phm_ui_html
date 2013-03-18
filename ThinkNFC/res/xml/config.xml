@@ -2,7 +2,7 @@
 <cordova>
     <access origin="http://127.0.0.1*" />
     <access origin=".*" />
-    <content src="index.html" />
+    <content src="app.html" />
     <log level="DEBUG" />
     <preference name="useBrowserHistory" value="true" />
     <preference name="exit-on-suspend" value="false" />
@@ -26,6 +26,6 @@
         <plugin name="Echo" value="org.apache.cordova.Echo" />
         <plugin name="Globalization" value="org.apache.cordova.Globalization" />
         <plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
-        <plugin name="NfcPlugin" value="com.chariotsolutions.nfc.plugin.NfcPlugin" />
+        <plugin name="NfcPlugin" value="com.phmhealth.nfc.plugin.NfcPlugin" />
     </plugins>
 </cordova>
