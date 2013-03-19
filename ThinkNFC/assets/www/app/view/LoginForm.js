@@ -116,6 +116,10 @@ Ext.define('MyApp.view.LoginForm', {
         Ext.Viewport.add(paneltab);
         requestPosition();
        }
+	   else if (Ext.getCmp('pass').getValue().length < 4){
+    
+		 alert("minimum 4 characters needed");   
+		}
         else
        {
         	alert('Login failed');	
