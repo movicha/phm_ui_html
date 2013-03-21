@@ -13,6 +13,8 @@
  * Do NOT hand edit this file.
  */
 
+var id="";
+
 Ext.define('MyApp.view.MainTabPanel', {
     extend: 'Ext.Container',
 
@@ -70,11 +72,12 @@ Ext.define('MyApp.view.MainTabPanel', {
                                     },
                                     {
                                         xtype: 'label',
+                                        id : 'firstName',                                        
                                         flex: 1,
                                         cls: [
                                             'visitdate'
                                         ],
-                                        html: 'Firstname',
+                                        html: firstName,
                                         style: 'text-align:right;margin-right:20px;'
                                     }
                                 ]
@@ -115,6 +118,7 @@ Ext.define('MyApp.view.MainTabPanel', {
                                     },
                                     {
                                         xtype: 'label',
+                                        id : 'lastName',
                                         flex: 1,
                                         cls: [
                                             'visitdate'
@@ -313,13 +317,13 @@ var app = {
 	        this.bind();
 	    },
 	    bind: function () {
-	    	Ext.getCmp('maindata').setMasked(true);
 	        document.addEventListener('deviceready', this.deviceready, true);
 	    },
 	    deviceready: function () {
 	    
 	        function failure(reason) {
 	            navigator.notification.alert(reason, function() {}, "There was a problem");
+	            Ext.getCmp('maindata').setMasked(true);
 	        }
 
 	        nfc.addNdefListener(
@@ -392,7 +396,7 @@ var app = {
 	        alert("Ndef Record : "+Ndef.bytesToString(records[0].payload));
 	        console.log("Records : "+Ndef.bytesToString(records[0].payload));
 	        
-	        var id = Ndef.bytesToString(records[0].payload);
+	        id = Ndef.bytesToString(records[0].payload);
 	        var flag=0;
 	        
 	        for(var i=0;i<patientDetails.length;i++)
@@ -424,19 +428,13 @@ var app = {
 			var tag=event.tag,
 			records = tag.ndefMessage || [];
 			
-			var id = Ndef.bytesToString(records[0].payload);
-	        var flag=0;
-	        
-	        for(var i=0;i<patientDetails.length;i++)
-	    	{
-	    	  if(id==patientDetails[i])
-	    	  flag=1;	  
-	    	}
-
-	        if(flag==1)
-	        {
-	        	alert("Patient Tag out successful");
-	       	}
+			if(id == Ndef.bytesToString(records[0].payload))
+			  {
+	          	alert("Patient Tag out successful");
+	        	var paneltab = Ext.create('MyApp.view.MainTabPanel');
+                Ext.getCmp('loginForm').destroy();
+                Ext.Viewport.add(paneltab);
+			  }
 	        else
 	        {
 	        	alert("Un-Authorized Patient tag");

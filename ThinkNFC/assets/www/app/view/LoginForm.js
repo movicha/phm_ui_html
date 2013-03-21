@@ -13,6 +13,7 @@
  * Do NOT hand edit this file.
  */
 
+var firstName="Samathan";
 var patientDetails = new Array();
 
 Ext.define('MyApp.view.LoginForm', {
@@ -117,18 +118,28 @@ Ext.define('MyApp.view.LoginForm', {
         method : 'POST',
         type:'ajax',
         
-        params : {
+        jsonData : {
          username : 'samathan',
          password : Ext.getCmp('pass').getValue(),
          usertype :'1'
         },
                  success: function(response) {
+                	 
+                	 if(response.responseText.indexOf("AutenticationResponse") !== -1)
+                		 {
+                	 alert(Ext.JSON.decode(response.responseText).AutenticationResponse.status);
+                		 }
+                	 else
+                	{	 	 
+                	 console.log(response.responseText);
                 	 parse(Ext.JSON.decode(response.responseText));
+                	 
                 	 console.log("newNoteCommanddcdc");
                      var paneltab = Ext.create('MyApp.view.MainTabPanel');
                      Ext.getCmp('loginForm').destroy();
                      Ext.Viewport.add(paneltab);
                      requestPosition();
+                	}
                  },
                  failure: function(response) {
                    console.log(response.responseText);
@@ -146,7 +157,7 @@ Ext.define('MyApp.view.LoginForm', {
         	    patientDetails[j++]=patientName;
         	    
         	    /*console.log("PatientId : "+patientId+" PatientName : "+patientName) */
-        	    console.log(window.patientDetails);
+        	    console.log("Patient details in global var : "+patientDetails);
         	}
         	}
  
