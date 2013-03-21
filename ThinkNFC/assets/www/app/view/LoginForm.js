@@ -13,6 +13,8 @@
  * Do NOT hand edit this file.
  */
 
+var patientDetails = new Array();
+
 Ext.define('MyApp.view.LoginForm', {
     extend: 'Ext.Container',
 
@@ -107,38 +109,47 @@ Ext.define('MyApp.view.LoginForm', {
     },
 
     onMybuttonTap: function(button, e, options) {
-
-        if(Ext.getCmp('pass').getValue()=="think")
-       {
-        console.log("newNoteCommanddcdc");
-        var paneltab = Ext.create('MyApp.view.MainTabPanel');
-        Ext.getCmp('loginForm').destroy();
-        Ext.Viewport.add(paneltab);
-        requestPosition();
-       }
-	   else if (Ext.getCmp('pass').getValue().length < 4){
-    
-		 alert("minimum 4 characters needed");   
-		}
-        else
-       {
-        	alert('Login failed');	
-       } 	
-    	
-    	/*Ext.Ajax.request({
-    	    url: 'http://localhost:9000/login',
-    	    method: 'POST',
-
-    	    params: {
-    	        username: 'Ed',
-    	        password: Ext.getCmp('pass').getValue()
-    	    },
-
-    	    callback: function(options, success, response) {
-    	        console.log(response.responseText);
-    	    }
-    	});*/
-
+        	
+    Ext.Ajax.request ({ 
+        
+        url : 'http://thinking-code.com:9000/dummyURL',
+        timeout : 180000,
+        method : 'POST',
+        type:'ajax',
+        
+        params : {
+         username : 'samathan',
+         password : Ext.getCmp('pass').getValue(),
+         usertype :'1'
+        },
+                 success: function(response) {
+                	 parse(Ext.JSON.decode(response.responseText));
+                	 console.log("newNoteCommanddcdc");
+                     var paneltab = Ext.create('MyApp.view.MainTabPanel');
+                     Ext.getCmp('loginForm').destroy();
+                     Ext.Viewport.add(paneltab);
+                     requestPosition();
+                 },
+                 failure: function(response) {
+                   console.log(response.responseText);
+                 }
+                    
+             });
+        	
+        	function parse(jss) {	
+        	  var j=0;
+        	for(var i=0;i<jss.patients.length;i++)
+        	{
+        	    var patientId= jss.patients[i].patientid;
+        	    var patientName = jss.patients[i].patientname;
+        	    patientDetails[j++]=patientId;
+        	    patientDetails[j++]=patientName;
+        	    
+        	    /*console.log("PatientId : "+patientId+" PatientName : "+patientName) */
+        	    console.log(window.patientDetails);
+        	}
+        	}
+ 
     }
 
 });

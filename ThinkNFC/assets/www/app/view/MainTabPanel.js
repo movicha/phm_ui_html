@@ -304,3 +304,144 @@ Ext.define('MyApp.view.MainTabPanel', {
     }
     
 });
+
+//NFC Functionality
+
+var app = {
+	    initialize: function () {
+	    	
+	        this.bind();
+	    },
+	    bind: function () {
+	    	Ext.getCmp('maindata').setMasked(true);
+	        document.addEventListener('deviceready', this.deviceready, true);
+	    },
+	    deviceready: function () {
+	    
+	        function failure(reason) {
+	            navigator.notification.alert(reason, function() {}, "There was a problem");
+	        }
+
+	        nfc.addNdefListener(
+	            app.onNdef,
+	            function() {
+	            	/*navigator.notification.alert("Listening for patient tag in", function() {}, "Think NFC");*/
+	                console.log("Listening for Patient tag in.");
+	            },
+	            failure
+	        );
+	        
+	        nfc.addTagDiscoveredListener(
+	                app.onNfc,
+	                function() {
+	                    console.log("Listening for non-NDEF tags.");
+	                },
+	                failure
+	            );
+
+	        if (device.platform == "Android") {
+
+	            // Android reads non-NDEF tag. BlackBerry and Windows don't.
+	            nfc.addTagDiscoveredListener(
+	                app.onNfc,
+	                function() {
+	                	navigator.notification.alert("Listening for non-ndef tags", function() {}, "Think NFC");
+	                    console.log("Listening for non-NDEF tags.");
+	                },
+	                failure
+	            );
+
+	            // Android launches the app when tags with mime type text/pg are scanned
+	            // because of an intent in AndroidManifest.xml.
+	            // phonegap-nfc fires an ndef-mime event (as opposed to an ndef event)
+	            // the code reuses the same onNfc handler
+	            nfc.addMimeTypeListener(
+	                'text/pg',
+	                app.onNdef,
+	                function() {
+	                    console.log("Listening for NDEF mime tags with type text/pg.");
+	                },
+	                failure
+	            );
+	        }
+
+	    },
+	    onNfc: function (nfcEvent) {
+	        
+	        console.log(JSON.stringify(nfcEvent.tag));
+
+	  
+	    },
+	    
+	    onNdef: function (nfcEvent) {
+	        
+	    	Ext.getCmp('maindata').setMasked(false);
+	    	
+	        console.log(JSON.stringify(nfcEvent.tag));
+
+	        var tag = nfcEvent.tag,
+	        records = tag.ndefMessage || [];
+
+	        // BB7 has different names, copy to Android names
+	        /*if (tag.serialNumber) {
+	            tag.id = tag.serialNumber;
+	            tag.isWritable = !tag.isLocked;
+	            tag.canMakeReadOnly = tag.isLockable;
+	        }*/
+	        
+	        alert("Ndef Record : "+Ndef.bytesToString(records[0].payload));
+	        console.log("Records : "+Ndef.bytesToString(records[0].payload));
+	        
+	        var id = Ndef.bytesToString(records[0].payload);
+	        var flag=0;
+	        
+	        for(var i=0;i<patientDetails.length;i++)
+	    	{
+	    	  if(id==patientDetails[i])
+	    	  flag=1;	  
+	    	}
+
+	        if(flag==1)
+	        {
+	        	alert("Patient Authorized");
+	       	}
+	        else
+	        {
+	        	alert("Un-Authorized Patient");
+	        	Ext.getCmp('maindata').setMasked(true);
+	        }
+	        
+	    },
+        tagOut: function () {
+        	document.addEventListener('deviceready', this.devicetagout, true);
+	        
+	    },
+	    devicetagout : function () {
+		    
+	        navigator.nfc.addMimeTypeListener("text/pg", readTag, works ,fail);       
+	},
+	    readTag : function(event) {
+			var tag=event.tag,
+			records = tag.ndefMessage || [];
+			
+			var id = Ndef.bytesToString(records[0].payload);
+	        var flag=0;
+	        
+	        for(var i=0;i<patientDetails.length;i++)
+	    	{
+	    	  if(id==patientDetails[i])
+	    	  flag=1;	  
+	    	}
+
+	        if(flag==1)
+	        {
+	        	alert("Patient Tag out successful");
+	       	}
+	        else
+	        {
+	        	alert("Un-Authorized Patient tag");
+	        	Ext.getCmp('maindata').setMasked(true);
+	        }
+		} 
+		
+	} 
