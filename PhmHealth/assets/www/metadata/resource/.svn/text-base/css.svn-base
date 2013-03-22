@@ -1,0 +1,14 @@
+{
+    "type": "cssresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "url": "css/main.css",
+        "id": "styke"
+    },
+    "id": "ExtBox1-ext-gen15226",
+    "designerId": "9fece8d8-7440-4228-85bb-77c85a3c7daf"
+}

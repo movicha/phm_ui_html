@@ -1,0 +1,533 @@
+{
+    "type": "container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "MainTabPanel",
+        "id": "mainTabPanel",
+        "layout": "fit"
+    },
+    "id": "ExtBox1-ext-gen9831",
+    "designerId": "90a4bcf8-4580-41ac-881a-356dbbad81b7",
+    "cn": [
+        {
+            "type": "panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|userClassName": "MyPanel",
+                "style": "",
+                "layout": "vbox",
+                "scrollable": null
+            },
+            "designerId": "2b4278a5-b387-4a24-9ece-64ec31177536",
+            "cn": [
+                {
+                    "type": "panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 0,
+                        "designer|userClassName": "MyPanel1",
+                        "docked": "top",
+                        "height": 100,
+                        "style": "margin-top:5%;"
+                    },
+                    "designerId": "dfcf6363-8ca6-49be-8a08-708a80a48f60",
+                    "cn": [
+                        {
+                            "type": "component",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|userClassName": "MyComponent",
+                                "centered": true,
+                                "html": "<img src=\"images/high/logo.png\" />"
+                            },
+                            "designerId": "754d3295-8046-46b0-8e0c-09d1ded086b8"
+                        }
+                    ]
+                },
+                {
+                    "type": "panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 1,
+                        "designer|userClassName": "MyPanel1",
+                        "id": "maindata",
+                        "itemId": "mypanel6",
+                        "style": "",
+                        "hideOnMaskTap": null,
+                        "scrollable": "vertical"
+                    },
+                    "designerId": "08d32d48-b960-477e-baa1-44a402bb6f17",
+                    "cn": [
+                        {
+                            "type": "panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|userClassName": "MyPanel3",
+                                "height": 20,
+                                "padding": null,
+                                "style": null,
+                                "hideOnMaskTap": null,
+                                "layout": "hbox",
+                                "modal": null
+                            },
+                            "designerId": "ee3dbda8-149e-46d0-8dae-8f036da7c094",
+                            "cn": [
+                                {
+                                    "type": "label",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 0.5,
+                                        "designer|userClassName": "MyLabel",
+                                        "cls": [
+                                            "visitdatelabel"
+                                        ],
+                                        "html": "Visit Date:",
+                                        "itemId": "mylabel",
+                                        "style": "margin-left:20px;"
+                                    },
+                                    "designerId": "6274f3d0-21a0-4f93-86b9-adbcd668d54e"
+                                },
+                                {
+                                    "type": "label",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1,
+                                        "designer|userClassName": "MyLabel",
+                                        "cls": [
+                                            "visitdate"
+                                        ],
+                                        "html": "Firstname",
+                                        "style": "text-align:right;margin-right:20px;"
+                                    },
+                                    "designerId": "4a165734-d6a2-4a5a-8078-33a38665f7a9"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|userClassName": "MyPanel3",
+                                "height": 25,
+                                "padding": null,
+                                "style": null,
+                                "hideOnMaskTap": null,
+                                "layout": "hbox",
+                                "modal": null
+                            },
+                            "designerId": "35684496-942f-46bb-aafe-40ac4ac4c7c5",
+                            "cn": [
+                                {
+                                    "type": "label",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 0.7,
+                                        "designer|userClassName": "MyLabel",
+                                        "cls": [
+                                            "visitdate"
+                                        ],
+                                        "contentEl": null,
+                                        "html": "date",
+                                        "id": "date",
+                                        "itemId": "date",
+                                        "style": "margin-left:20px;"
+                                    },
+                                    "designerId": "e608249f-9806-4f46-ac4f-8528601175d9",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|userClassName": "onMylabelPainted",
+                                                "fn": "onMylabelPainted",
+                                                "implHandler": [
+                                                    "\r",
+                                                    "\r",
+                                                    "var currentTime = new Date();\r",
+                                                    "\r",
+                                                    "val = Ext.util.Format.date(currentTime, 'F d, Y');\r",
+                                                    "var label = Ext.getCmp('date');\r",
+                                                    "label.setHtml(val);\r",
+                                                    "\r",
+                                                    ""
+                                                ],
+                                                "buffer": null,
+                                                "name": "painted"
+                                            },
+                                            "designerId": "651096d0-50ef-45aa-a8c6-38877d707a98"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "label",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1,
+                                        "designer|userClassName": "MyLabel",
+                                        "cls": [
+                                            "visitdate"
+                                        ],
+                                        "html": "Lastname",
+                                        "style": "text-align:right;margin-right:20px;"
+                                    },
+                                    "designerId": "9131332d-9baf-4344-a41f-17c8db23bdd9"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|userClassName": "MyPanel3",
+                                "height": 20,
+                                "padding": null,
+                                "style": "margin-top:10%;",
+                                "hideOnMaskTap": null,
+                                "layout": "hbox",
+                                "modal": null
+                            },
+                            "designerId": "7a39ddc8-d1a1-409e-9713-9fc2fa59ee03",
+                            "cn": [
+                                {
+                                    "type": "label",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 0.6,
+                                        "designer|userClassName": "MyLabel",
+                                        "cls": [
+                                            "visitdate"
+                                        ],
+                                        "contentEl": null,
+                                        "height": 20,
+                                        "html": "Visit Timer",
+                                        "id": null,
+                                        "itemId": null,
+                                        "style": "margin-left:40%;"
+                                    },
+                                    "designerId": "b0a4d4bb-e4c4-40f2-b67c-d9c710ae958c"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|userClassName": "MyPanel3",
+                                "height": null,
+                                "itemId": "mypanel9",
+                                "padding": null,
+                                "style": null,
+                                "hideOnMaskTap": null,
+                                "layout": "vbox",
+                                "modal": null,
+                                "scrollable": null
+                            },
+                            "designerId": "2a6deed9-deb2-46b0-94b6-5d45313a0cc6",
+                            "cn": [
+                                {
+                                    "type": "panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|userClassName": "MyPanel12",
+                                        "cls": [
+                                            "stopwatch"
+                                        ],
+                                        "html": "00:00:00",
+                                        "id": "timer",
+                                        "itemId": "mypanel12",
+                                        "style": "margin-left:auto;margin-right:auto;"
+                                    },
+                                    "designerId": "69d919a5-2081-4088-9935-05eb758c69f0",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|userClassName": "onTimerInitialize",
+                                                "fn": "onTimerInitialize",
+                                                "implHandler": [
+                                                    ""
+                                                ],
+                                                "name": "initialize"
+                                            },
+                                            "designerId": "9ba83aaa-8939-41e2-a6f2-29aa9de98301"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "designer|userClassName": "MyPanel12",
+                                        "height": 150,
+                                        "itemId": "mypanel12",
+                                        "layout": "hbox",
+                                        "scrollable": false
+                                    },
+                                    "designerId": "2aa8fb9b-b2a6-41e3-a337-5ae72f6fff6c",
+                                    "cn": [
+                                        {
+                                            "type": "list",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|userClassName": "MyList",
+                                                "bottom": null,
+                                                "height": null,
+                                                "maxHeight": null,
+                                                "style": "margin-top:5%;",
+                                                "ui": "round",
+                                                "width": "100%",
+                                                "layout": null,
+                                                "modal": false,
+                                                "scrollable": [
+                                                    "\r",
+                                                    "  direction: 'horizontal',\r",
+                                                    "  directionLock: true,\r",
+                                                    "  momentumEasing:  {\r",
+                                                    "     momentum: {\r",
+                                                    "       acceleration: 30,\r",
+                                                    "       friction: 0.5\r",
+                                                    "     },\r",
+                                                    "     bounce: {\r",
+                                                    "        acceleration: 0.0001,\r",
+                                                    "        springTension: 0.9999,\r",
+                                                    "     },\r",
+                                                    "     minVelocity: 5\r",
+                                                    "  },\r",
+                                                    "  outOfBoundRestrictFactor: 0 "
+                                                ],
+                                                "emptyText": "</pre> <div class=\"notes-list-empty-text\">No notes found.</div> <pre>",
+                                                "itemCls": "gh",
+                                                "scrollToTopOnRefresh": false,
+                                                "store": "Notes",
+                                                "disableSelection": false,
+                                                "itemHeight": 50,
+                                                "onItemDisclosure": true,
+                                                "refreshHeightOnUpdate": false,
+                                                "variableHeights": false
+                                            },
+                                            "designerId": "d1c46438-1975-4d05-b8a4-095e7f171d3a",
+                                            "cn": [
+                                                {
+                                                    "type": "template",
+                                                    "reference": {
+                                                        "name": "itemTpl",
+                                                        "type": "object"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "designer|userClassName": "itemTpl",
+                                                        "implHandler": [
+                                                            "\r",
+                                                            "<div class=\"list-item-title\">{title}</div>\r",
+                                                            ""
+                                                        ],
+                                                        "designer|displayName": "itemTpl"
+                                                    },
+                                                    "designerId": "496fa9e4-fe0c-40b4-8d36-d92aa02be43c"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 0,
+                                        "designer|userClassName": "MyButton1",
+                                        "cls": "gradient",
+                                        "itemId": "endvisit",
+                                        "style": "margin-left:auto;margin-right:auto;margin-bottom:10px;",
+                                        "ui": "forward",
+                                        "width": 100,
+                                        "text": "END VISIT"
+                                    },
+                                    "designerId": "54ae6d21-739c-4639-989c-04fcc1661726",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|userClassName": "onMybutton1Tap",
+                                                "fn": "onMybutton1Tap",
+                                                "implHandler": [
+                                                    "clearInterval(stopWatchInt);\r",
+                                                    "var watch = Ext.getCmp('timer');\r",
+                                                    "\r",
+                                                    "alert(watch.getInnerHtmlElement().dom.innerHTML);\r",
+                                                    "\r",
+                                                    "\r",
+                                                    "Ext.getCmp('maindata').setMasked(\r",
+                                                    "{\r",
+                                                    "    xtype:'loadmask',\r",
+                                                    "    message:'Awaiting NFC Tag out (Patient)',\r",
+                                                    "    fullscreen: true,\r",
+                                                    "     html:\"<img src='images/loading3.gif'/>\",\r",
+                                                    "    indicator:false\r",
+                                                    "});"
+                                                ],
+                                                "name": "tap"
+                                            },
+                                            "designerId": "c4e2fd10-24a8-4c6f-a9c0-65efca3533ae"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|userClassName": "onMypanel6Initialize",
+                                "fn": "onMypanel6Initialize",
+                                "implHandler": [
+                                    "Ext.getCmp('maindata').setMasked(\r",
+                                    "{\r",
+                                    "    xtype:'loadmask',\r",
+                                    "    message:'Awaiting NFC Tag in (Patient)',\r",
+                                    "    fullscreen: true,\r",
+                                    "     html:\"<img src='images/loading3.gif'/>\",\r",
+                                    "    indicator:false\r",
+                                    "});\r",
+                                    "\r",
+                                    "\r",
+                                    "setTimeout(function () {            \r",
+                                    "    Ext.getCmp('maindata').setMasked(false);\r",
+                                    "\r",
+                                    "\r",
+                                    "    /*stopwatch starts function*/\r",
+                                    "\r",
+                                    "    stopWatchInt =  setInterval(function() {\r",
+                                    "\r",
+                                    "        var elapseTime;\r",
+                                    "        var watchObj = Ext.getCmp('timer');\r",
+                                    "        var minSec = watchObj.getHtml().split(\":\");\r",
+                                    "        var min  = parseInt(minSec[1],10);\r",
+                                    "        var sec  = parseInt(minSec[2],10);\r",
+                                    "        var msec = parseInt(minSec[3],10);\r",
+                                    "        var hr = parseInt(minSec[0],10);\r",
+                                    "\r",
+                                    "\r",
+                                    "        sec++;\r",
+                                    "\r",
+                                    "        if ( sec  == 60 ) { min++;  sec = 0; }\r",
+                                    "        if ( min  == 60 ) { hr++;  min = 0; }\r",
+                                    "\r",
+                                    "        elapseTime  = (hr  < 10) ?  \"0\" + hr  : hr;\r",
+                                    "        elapseTime += (min  < 10) ? \":0\" + min  : \":\" + min;\r",
+                                    "        elapseTime += (sec < 10) ? \":0\" + sec : \":\" + sec;\r",
+                                    "\r",
+                                    "\r",
+                                    "        watchObj.setHtml(elapseTime); \r",
+                                    "\r",
+                                    "    }, 1000);\r",
+                                    "\r",
+                                    "    /*ends stopwatch starts function*/\r",
+                                    "\r",
+                                    "\r",
+                                    "}, 5000);\r",
+                                    "\r",
+                                    "\r",
+                                    "\r",
+                                    ""
+                                ],
+                                "name": "initialize"
+                            },
+                            "designerId": "8bda44af-aa75-4785-9a8f-10904d15cd46"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

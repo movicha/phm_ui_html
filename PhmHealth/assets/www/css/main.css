@@ -1,0 +1,232 @@
+@font-face {
+    font-family: 'ColaborateThinRegular';
+    src: url('ColabThi-webfont.eot');
+    src: url('ColabThi-webfont.eot?#iefix') format('embedded-opentype'),
+         url('ColabThi-webfont.woff') format('woff'),
+         url('ColabThi-webfont.ttf') format('truetype'),
+         url('ColabThi-webfont.svg#ColaborateThinRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'ColaborateRegular';
+    src: url('ColabReg-webfont.eot');
+    src: url('ColabReg-webfont.eot?#iefix') format('embedded-opentype'),
+         url('ColabReg-webfont.woff') format('woff'),
+         url('ColabReg-webfont.ttf') format('truetype'),
+         url('ColabReg-webfont.svg#ColaborateRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+.gradient,.gradient.x-button-pressing{
+
+
+background-image: linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+background-image: -o-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+background-image: -moz-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+background-image: -webkit-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+background-image: -ms-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.38, #FD5223),
+	color-stop(0.85, #FB8868)
+);
+border:none;
+-webkit-border-top-right-radius: 1px;
+-webkit-border-bottom-right-radius: 1px;
+-moz-border-radius-topright: 1px;
+-moz-border-radius-bottomright: 1px;
+border-top-right-radius: 1px;
+border-bottom-right-radius: 1px;
+border-radius:none;
+color:#fff;
+font-size:80%;
+ font-family: 'ColaborateThinRegular';
+
+}
+.x-button-label, .x-hasbadge .x-badge {
+
+font-weight: normal;
+
+}
+
+.x-mask .x-mask-inner {
+position: relative;
+background: none;
+color: #262626;
+text-align: center;
+padding: .4em;
+font-size:14px;
+font-weight:normal;
+-webkit-border-radius: 0;
+border-radius: 0;
+width:100%;
+}
+.x-mask .x-mask-message {
+position: absolute;
+bottom: 1.7em;
+text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
+-webkit-box-flex: 0 !important;
+max-width: 100%;
+min-width: 8.5em;
+margin-left: auto;
+margin-right: auto;
+text-align: center;
+width: 100%;
+}
+
+.x-loading-spinner > span.x-loading-top,.x-loading-spinner > span.x-loading-bottom,.x-loading-spinner > span.x-loading-left, .x-loading-spinner > span.x-loading-right {
+background-color: rgba(230, 88, 9, 0.99);
+}
+.x-loading-spinner > span.x-loading-bottom {
+background-color: rgba(230, 88, 9, 0.99);
+opacity:0.4;
+}
+.x-loading-spinner > span.x-loading-left {
+background-color: rgba(230, 88, 9, 0.99);
+opacity:0.7;
+}
+.x-loading-spinner > span.x-loading-right {
+background-color: rgba(230, 88, 9, 0.99);
+opacity:0.5;
+}
+
+.x-loading-spinner > span.x-loading-top::before {
+background-color: rgba(230, 88, 9, 0.15);
+}
+
+.x-loading-spinner > span.x-loading-right::before {
+background-color: rgba(230, 88, 9, 0.3);
+}
+.x-loading-spinner > span.x-loading-bottom::before {
+background-color: rgba(230, 88, 9, 0.5);
+}
+.x-loading-spinner > span.x-loading-left::before {
+background-color: rgba(230, 88, 9, 0.8);
+}
+.x-loading-spinner > span.x-loading-bottom::after {
+background-color: rgba(230, 88, 9, 0.35);
+}
+.x-loading-spinner > span.x-loading-left::after {
+background-color: rgba(230, 88, 9, 0.6);
+}
+.x-loading-spinner > span.x-loading-right::after {
+background-color: rgba(230, 88, 9, 0.2);
+}
+.x-loading-spinner > span.x-loading-top::after {
+background-color: rgba(230, 88, 9, 0.9);
+}
+.x-mask {
+
+background: rgba(238, 238, 238, 1) center center no-repeat;
+}
+
+.visitdate{
+	font-size:85%;
+	color:#272727;
+	font-family: 'ColaborateRegular';
+	
+}
+.visitdatelabel{
+	font-size:75%;
+	color:#343434;
+	font-style:italic;
+	font-family: 'ColaborateRegular';
+	
+}
+
+.stopwatch{
+	
+	text-align:center;
+	font-size:400%;
+	color:#343434;
+	font-family: 'ColaborateThinRegular';
+	
+	
+}
+
+.x-list .x-list-item.x-item-selected .x-dock-horizontal {
+	background-image: none;
+	background-color: #006bb6;
+	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0398ff), color-stop(3%, #007ad0), color-stop(100%, #005c9d));
+	background-image: -webkit-linear-gradient(top, #0398ff,#007ad0 3%,#005c9d);
+	background-image: linear-gradient(top, #0398ff,#007ad0 3%,#005c9d);
+	color: #000000 !important;
+	text-shadow: none;
+}
+.x-list-round.x-list-ungrouped .x-list-item .x-dock-horizontal, .x-list-round.x-list-grouped .x-list-item .x-dock-horizontal {
+background: transparent;
+border-bottom: 1px solid #dedede;
+border-top: 1px solid #dedede;
+border-left: none;
+border-right: none;
+color:#272727;
+font-family: 'ColaborateRegular';
+}
+.gh .x-list-disclosure {
+overflow: hidden;
+-webkit-mask: 0 0 url('../images/mask.png') no-repeat;
+-webkit-mask-size: 1.5em;
+background-image: none;
+background-color: #fd5223;
+background-image: linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+background-image: -o-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+background-image: -moz-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+background-image: -webkit-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+background-image: -ms-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.38, #FD5223),
+	color-stop(0.85, #FB8868)
+);
+
+width: 1.5em;
+height: 1.5em;
+margin: 0.5em 0.5em 0 0;
+}
+
+.gradient:before, .gradient:after {
+content: "";
+position: absolute;
+width: 0.87em;
+height: 1.8em;
+top: 0.01em;
+left: auto;
+z-index: 2;
+-webkit-mask: 0.125em 0 url('../images/button.png') no-repeat;
+-webkit-mask-size: 0.807em 1.8em;
+overflow: hidden;
+background-image: linear-gradient(bottom, #FD5223 38%, #FB8868 85%) !important;
+background-image: -o-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+background-image: -moz-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+background-image: -webkit-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+background-image: -ms-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.38, #FD5223),
+	color-stop(0.85, #FB8868)
+)  !important;
+}
+
+
+.loading-mask{
+    background-image: url(../images/loading.gif);
+    background-repeat: no-repeat;
+    position:absolute;
+    height:32px;
+    width:32px;
+    margin:-16px 0px 0px -16px;
+    top: 50%;
+    left: 50%;
+}
