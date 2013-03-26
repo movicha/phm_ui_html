@@ -49,7 +49,7 @@ Ext.define('MyApp.view.LoginForm', {
                         flex: 1,
                         style: '',
                         items: [
-                            {
+                           {
                                 xtype: 'panel',
                                 style: 'background:none;margin-top:10%;',
                                 hideOnMaskTap: false,
@@ -57,19 +57,31 @@ Ext.define('MyApp.view.LoginForm', {
                                     type: 'vbox'
                                 },
                                 items: [
+									
                                     {
                                         xtype: 'formpanel',
-                                        height: 60,
+                                        height: 120,
                                         style: 'margin-bottom:10px;',
                                         scrollable: false,
                                         items: [
+											{
+                                                xtype: 'textfield',
+                                                id: 'user',
+                                                itemId: 'myusernamefield',
+                                                style: 'margin-left:auto;margin-right:auto;margin-bottom:5px;',
+                                                width: 285,
+                                                label: 'Username',
+                                                labelCls: 'labelbg',
+                                                labelWidth: 100,
+                                                name: 'username'
+                                            },
                                             {
                                                 xtype: 'passwordfield',
                                                 id: 'pass',
                                                 maxHeight: '',
-                                                minHeight: 60,
+                                                minHeight: '',
                                                 style: 'margin-left:auto;margin-right:auto;',
-                                                width: 300,
+                                                width: 285,
                                                 label: 'Password',
                                                 labelCls: 'labelbg',
                                                 labelWidth: 100,
@@ -80,6 +92,16 @@ Ext.define('MyApp.view.LoginForm', {
                                                 readOnly: false
                                             }
                                         ]
+                                    },
+									{
+                                        xtype: 'label',
+                                        id : 'status',
+                                        cls: [
+                                            'error'
+                                        ],
+										 style: 'margin-left:auto;margin-right:auto;margin-bottom:5px;',
+                                        height: 23,
+                                        html: ''
                                     },
                                     {
                                         xtype: 'button',
@@ -109,9 +131,18 @@ Ext.define('MyApp.view.LoginForm', {
             }
         ]
     },
-
     onMybuttonTap: function(button, e, options) {
-        	
+	 
+	 Ext.getCmp('status').setHtml('');
+	 Ext.getCmp('loginForm').setMasked(
+        {
+            xtype:'loadmask',
+            message:'',
+            fullscreen: true,
+            html:"",
+            cls:"maskd"
+        });
+
     Ext.Ajax.request ({ 
         
         url : 'http://204.13.110.186:9000/1/login',
@@ -120,15 +151,17 @@ Ext.define('MyApp.view.LoginForm', {
         type:'ajax',
         
         jsonData : {
-         username : 'samathan',
+         username : Ext.getCmp('user').getValue(),
          password : Ext.getCmp('pass').getValue(),
          usertype :'1'
         },
                  success: function(response) {
+                 
+                 	Ext.getCmp('loginForm').setMasked(false);	
                 	 
                 	 if(response.responseText.indexOf("AutenticationResponse") !== -1)
                 		 {
-                	 alert(Ext.JSON.decode(response.responseText).AutenticationResponse.status);
+                	 		Ext.getCmp('status').setHtml(Ext.JSON.decode(response.responseText).AutenticationResponse.status);
                 		 }
                 	 else
                 	{	 	 
@@ -160,6 +193,8 @@ Ext.define('MyApp.view.LoginForm', {
                 	}
                  },
                  failure: function(response) {
+                   Ext.getCmp('loginForm').setMasked(false);
+                   Ext.getCmp('status').setHtml("Server Error. Try Again.");
                    console.log(response.responseText);
                  }
                     

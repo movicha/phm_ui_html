@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentFilter.MalformedMimeTypeException;
 import android.nfc.*;
+import android.nfc.tech.MifareClassic;
 import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
 import android.os.Parcelable;
@@ -17,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +64,7 @@ public class NfcPlugin extends CordovaPlugin {
         }
 
         createPendingIntent();
-
+        
         if (action.equalsIgnoreCase(REGISTER_MIME_TYPE)) {
             registerMimeType(data, callbackContext);
 
@@ -351,7 +353,7 @@ public class NfcPlugin extends CordovaPlugin {
                     Ndef ndef = Ndef.get(tag);
                     fireNdefEvent(NDEF_MIME, ndef, messages);
 
-                } else if (action.equals(NfcAdapter.ACTION_TECH_DISCOVERED)) {
+                } /*else if (action.equals(NfcAdapter.ACTION_TECH_DISCOVERED)) {
                     for (String tagTech : tag.getTechList()) {
                         Log.d(TAG, tagTech);
                         if (tagTech.equals(NdefFormatable.class.getName())) {
@@ -361,15 +363,113 @@ public class NfcPlugin extends CordovaPlugin {
                             fireNdefEvent(NDEF, ndef, messages);
                         }
                     }
-                }
+                }*/
 
                 if (action.equals(NfcAdapter.ACTION_TAG_DISCOVERED)) {
                     fireTagEvent(tag);
                 }
 
-                setIntent(new Intent());
+               // setIntent(new Intent());
+                
+                
+                //Reading Mifare tag
+                
+                //IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED);
+                
+                //try {
+                  //  ndef.addDataType("*/*");
+                //} catch (MalformedMimeTypeException e) {
+                  //  throw new RuntimeException("fail", e);
+                //}
+                //IntentFilter[] mFilters = new IntentFilter[] {
+                  //      ndef,
+                //};
+
+                // Setup a tech list for all NfcF tags
+                //String[][] mTechLists = new String[][] { new String[] { MifareClassic.class.getName() } };
+                
+                //Intent intnt = getIntent();
+                
+                //resolveIntent(intent); 
+                
             }
-        });
+
+            void resolveIntent(Intent intent) {
+                // 1) Parse the intent and get the action that triggered this intent
+                String action = intent.getAction();
+                // 2) Check if it was triggered by a tag discovered interruption.
+                if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
+                    //  3) Get an instance of the TAG from the NfcAdapter
+                    Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+                    // 4) Get an instance of the Mifare classic card from this TAG intent
+                    MifareClassic mfc = MifareClassic.get(tagFromIntent);
+                    byte[] data;
+                    
+                    try {       //  5.1) Connect to card 
+                    mfc.connect();
+                    boolean auth = false;
+                    String cardData = null;
+                    // 5.2) and get the number of sectors this card has..and loop thru these sectors
+                    int secCount = mfc.getSectorCount();
+                    int bCount = 0;
+                    int bIndex = 0;
+                    for(int j = 0; j < secCount; j++){
+                        // 6.1) authenticate the sector
+                        auth = mfc.authenticateSectorWithKeyA(j, MifareClassic.KEY_DEFAULT);
+                        if(auth){
+                            // 6.2) In each sector - get the block count
+                            bCount = mfc.getBlockCountInSector(j);
+                            bIndex = 0;
+                            for(int i = 0; i < bCount; i++){
+                                bIndex = mfc.sectorToBlock(j);
+                                // 6.3) Read the block
+                                data = mfc.readBlock(bIndex);    
+                                // 7) Convert the data into a string from Hex format.                
+                                Log.i(TAG, getHexString(data));
+                                
+                                fireMifareTagEvent("MIFARE", getHexString(data));
+                                bIndex++;
+                            }
+                        }else{ // Authentication failed - Handle it
+                            
+                        }
+                    }    
+                }catch (IOException e) { 
+                        Log.e(TAG, e.getLocalizedMessage());
+                    }
+            }// End of method
+        }
+
+		
+				 final byte[] HEX_CHAR_TABLE = {
+					    (byte)'0', (byte)'1', (byte)'2', (byte)'3',
+					    (byte)'4', (byte)'5', (byte)'6', (byte)'7',
+					    (byte)'8', (byte)'9', (byte)'a', (byte)'b',
+					    (byte)'c', (byte)'d', (byte)'e', (byte)'f'
+					  };    
+
+					  public String getHexString(byte[] raw) 
+					    throws UnsupportedEncodingException 
+					  {
+					    byte[] hex = new byte[2 * raw.length];
+					    int index = 0;
+
+					    for (byte b : raw) {
+					      int v = b & 0xFF;
+					      hex[index++] = HEX_CHAR_TABLE[v >>> 4];
+					      hex[index++] = HEX_CHAR_TABLE[v & 0xF];
+					    }
+					    return new String(hex, "ASCII");
+					  }
+				
+			});
+    }
+    
+    private void fireMifareTagEvent(String type, String patientID)
+    {
+    	// String command = MessageFormat.format(javaScriptEventTemplate, type, "{'patientid':'" + patientID + "'}");
+    	Log.v(TAG, "handleMifareTag");
+    	this.webView.sendJavascript("handleMifareTag(" + patientID + ")");
     }
 
     private void fireNdefEvent(String type, Ndef ndef, Parcelable[] messages) {

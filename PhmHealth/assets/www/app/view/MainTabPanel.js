@@ -77,7 +77,7 @@ Ext.define('MyApp.view.MainTabPanel', {
                                         cls: [
                                             'visitdate'
                                         ],
-                                        html: firstName,
+                                        html: 'firstName',
                                         style: 'text-align:right;margin-right:20px;'
                                     }
                                 ]
@@ -311,7 +311,12 @@ Ext.define('MyApp.view.MainTabPanel', {
 
 //NFC Functionality
 
+
+
 var app = {
+		handleMifareTag: function(tag) {
+			alert(tag);
+		},
 	    initialize: function () {
 	    	
 	        this.bind();
@@ -322,28 +327,27 @@ var app = {
 	    deviceready: function () {
 	    
 	        function failure(reason) {
-	            navigator.notification.alert(reason, function() {}, "pHmHealth");
-	            // Ext.getCmp('maindata').setMasked(true);
+	            navigator.notification.alert("Failure : " + reason, function() {}, "pHmHealth");
 	            Ext.getCmp('loginForm').setMasked(false);
 	        }
 
 	        nfc.addNdefListener(
 	            app.onNdef,
 	            function() {
-	            	/*navigator.notification.alert("Listening for patient tag in", function() {}, "pHmHealth");*/
+	            	navigator.notification.alert("Generic NDEF Tag listener added.", function() {}, "pHmHealth");
 	                console.log("Listening for Patient tag in.");
 	            },
 	            failure
 	        );
 	        
-	        nfc.addTagDiscoveredListener(
+	        /*nfc.addTagDiscoveredListener(
 	                app.onNfc,
 	                function() {
-	                	navigator.notification.alert("Listening for non-ndef tags", function() {}, "pHmHealth");
-	                    console.log("Listening for non-NDEF tags.");
+	                	navigator.notification.alert("Tag discovered listener added.", function() {}, "pHmHealth");
+	                    console.log("Listening for tags.");
 	                },
 	                failure
-	            );
+	            );*/
 
 	        if (device.platform == "Android") {
 
@@ -351,7 +355,7 @@ var app = {
 	            nfc.addTagDiscoveredListener(
 	                app.onNfc,
 	                function() {
-	                	navigator.notification.alert("Listening for non-ndef tags", function() {}, "pHmHealth");
+	                	navigator.notification.alert("Tag discovered listener added.", function() {}, "pHmHealth");
 	                    console.log("Listening for non-NDEF tags.");
 	                },
 	                failure
@@ -365,7 +369,7 @@ var app = {
 	                'text/pg',
 	                app.onNdef,
 	                function() {
-	                	navigator.notification.alert("Listening for NDEF mime tags with type text/pg.", function() {}, "pHmHealth");
+	                	navigator.notification.alert("MIME Type listener added.", function() {}, "pHmHealth");
 	                    console.log("Listening for NDEF mime tags with type text/pg.");
 	                },
 	                failure
@@ -374,18 +378,15 @@ var app = {
 
 	    },
 	    onNfc: function (nfcEvent) {
-	        
 	        console.log(JSON.stringify(nfcEvent.tag));
-	        alert("On Nfc : "+JSON.stringify(nfcEvent.tag), function() {}, "pHmHealth");
-
-	  
+	        alert("onNfc Called. the tag is : "+ JSON.stringify(nfcEvent.tag), function() {}, "pHmHealth");
 	    },
-	    
 	    onNdef: function (nfcEvent) {
 	        
 	    	Ext.getCmp('maindata').setMasked(false);
 	    	
 	    	alert("On Ndef : "+JSON.stringify(nfcEvent.tag), function() {}, "pHmHealth");
+	    	
 	        console.log(JSON.stringify(nfcEvent.tag));
 
 	        var tag = nfcEvent.tag,
