@@ -294,18 +294,18 @@ Ext.define('MyApp.view.MainTabPanel', {
         clearInterval(stopWatchInt);
         var watch = Ext.getCmp('timer');
 
-     /*   alert(watch.getInnerHtmlElement().dom.innerHTML);*/
+        alert(watch.getInnerHtmlElement().dom.innerHTML);
 
 
-        /*Ext.getCmp('maindata').setMasked(
+        Ext.getCmp('maindata').setMasked(
         {
             xtype:'loadmask',
             message:'Awaiting NFC Tag out (Patient)',
             fullscreen: true,
             html:"<img src='images/loading3.gif'/>",
             indicator:false
-        });*/
-        window.location="app.html";
+        });
+//        window.location="app.html";
     }
     
     
@@ -385,8 +385,8 @@ var app = {
 	    },
        onNdef: function (nfcEvent) {
 	        
-	 
-	    	
+    	   if(tagFlag==0)
+    	  {	   
 	        console.log("On Ndef : "+JSON.stringify(nfcEvent.tag));
 
 	        var tag = nfcEvent.tag,
@@ -422,6 +422,9 @@ var app = {
 	        	Ext.getCmp('loginForm').destroy();
             	Ext.Viewport.add(paneltab); 
             	app.setPatient(id);
+            	tagFlag=1;
+            	
+            	
 	       	}
 	        else
 	        {
@@ -430,8 +433,31 @@ var app = {
 	        	/*Ext.getCmp('loginForm').setMasked(true);*/
 	        }
 	        
-	    },
-        tagOut: function () {
+	    }
+    	   else
+    	  {
+    		
+    		var tag = nfcEvent.tag,
+   	        records = tag.ndefMessage || [];
+
+   	        var ndefRecord = "";
+   	       
+   	        ndefRecord = nfc.decodePayload(records[0]);
+   	        
+   	        
+   	        if(id == ndefRecord)
+   	        	{
+   	        	 console.log("Patient tag out successful");
+   	        	 window.location="app.html";
+   	        	}
+   	        else
+   	        	{
+   	        	 alert("Please tag out with the card used for tag-in ");
+   	        	}
+    		   
+    	  }
+       },
+        /*tagOut: function () {
         	document.addEventListener('deviceready', this.devicetagout, true);
 	        
 	    },
@@ -455,7 +481,7 @@ var app = {
 	        	alert("Un-Authorized Patient tag");
 	        	Ext.getCmp('maindata').setMasked(true);
 	        }
-		},
+		},*/
 	   setPatient : function(id)
 	   {
 		   for(var i=0;i<patientDetails.length;i++)

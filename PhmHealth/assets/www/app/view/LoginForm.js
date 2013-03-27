@@ -14,8 +14,7 @@
  */
 
 var patientDetails = new Array();
-var firstName="";
-var lastName="";
+var tagFlag=0;
 
 Ext.define('MyApp.view.LoginForm', {
     extend: 'Ext.Container',
