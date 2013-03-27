@@ -268,7 +268,7 @@ Ext.define('MyApp.view.MainTabPanel', {
                                         /*ends stopwatch starts function*/
 
 
-                                    }, 5000);
+                                    }, 0);
 
 
 
@@ -294,7 +294,7 @@ Ext.define('MyApp.view.MainTabPanel', {
         clearInterval(stopWatchInt);
         var watch = Ext.getCmp('timer');
 
-        alert(watch.getInnerHtmlElement().dom.innerHTML);
+     /*   alert(watch.getInnerHtmlElement().dom.innerHTML);*/
 
 
         /*Ext.getCmp('maindata').setMasked(
