@@ -425,8 +425,9 @@ var app = {
 	       	}
 	        else
 	        {
-	        	alert("Un-Authorized Patient");
-	        	Ext.getCmp('loginForm').setMasked(true);
+	        	console.log("Un-Authorized Patient");
+	        	/*alert("Un-Authorized Patient");
+	        	/*Ext.getCmp('loginForm').setMasked(true);*/
 	        }
 	        
 	    },
