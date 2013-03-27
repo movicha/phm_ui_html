@@ -213,8 +213,7 @@ Ext.define('MyApp.view.LoginForm', {
         	    
         	    /*console.log("PatientId : "+patientId+" PatientName : "+patientName) */
         	    console.log("Patient details in global var : "+patientDetails);
-        	    firstName=patientDetails[1];
-        	    lastName=patientDetails[2];
+        	 
         	}
         	}
  

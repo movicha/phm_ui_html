@@ -123,7 +123,7 @@ Ext.define('MyApp.view.MainTabPanel', {
                                         cls: [
                                             'visitdate'
                                         ],
-                                        html: lastName,
+                                        html: 'lastName',
                                         style: 'text-align:right;margin-right:20px;'
                                     }
                                 ]
@@ -297,15 +297,17 @@ Ext.define('MyApp.view.MainTabPanel', {
         alert(watch.getInnerHtmlElement().dom.innerHTML);
 
 
-        Ext.getCmp('maindata').setMasked(
+        /*Ext.getCmp('maindata').setMasked(
         {
             xtype:'loadmask',
             message:'Awaiting NFC Tag out (Patient)',
             fullscreen: true,
             html:"<img src='images/loading3.gif'/>",
             indicator:false
-        });
+        });*/
+        window.location="app.html";
     }
+    
     
 });
 
@@ -334,7 +336,7 @@ var app = {
 	        nfc.addNdefListener(
 	            app.onNdef,
 	            function() {
-	            	navigator.notification.alert("Generic NDEF Tag listener added.", function() {}, "pHmHealth");
+	            	//navigator.notification.alert("Generic NDEF Tag listener added.", function() {}, "pHmHealth");
 	                console.log("Listening for Patient tag in.");
 	            },
 	            failure
@@ -355,7 +357,7 @@ var app = {
 	            nfc.addTagDiscoveredListener(
 	                app.onNfc,
 	                function() {
-	                	navigator.notification.alert("Tag discovered listener added.", function() {}, "pHmHealth");
+	                	//navigator.notification.alert("Tag discovered listener added.", function() {}, "pHmHealth");
 	                    console.log("Listening for non-NDEF tags.");
 	                },
 	                failure
@@ -369,7 +371,7 @@ var app = {
 	                'text/pg',
 	                app.onNdef,
 	                function() {
-	                	navigator.notification.alert("MIME Type listener added.", function() {}, "pHmHealth");
+	                	//navigator.notification.alert("MIME Type listener added.", function() {}, "pHmHealth");
 	                    console.log("Listening for NDEF mime tags with type text/pg.");
 	                },
 	                failure
@@ -378,50 +380,53 @@ var app = {
 
 	    },
 	    onNfc: function (nfcEvent) {
-	        console.log(JSON.stringify(nfcEvent.tag));
-	        alert("onNfc Called. the tag is : "+ JSON.stringify(nfcEvent.tag), function() {}, "pHmHealth");
+	        console.log("on Nfc : "+JSON.stringify(nfcEvent.tag));
+	        //alert("onNfc Called. the tag is : "+ JSON.stringify(nfcEvent.tag), function() {}, "pHmHealth");
 	    },
-	    onNdef: function (nfcEvent) {
+       onNdef: function (nfcEvent) {
 	        
-	    	Ext.getCmp('maindata').setMasked(false);
+	 
 	    	
-	    	alert("On Ndef : "+JSON.stringify(nfcEvent.tag), function() {}, "pHmHealth");
-	    	
-	        console.log(JSON.stringify(nfcEvent.tag));
+	        console.log("On Ndef : "+JSON.stringify(nfcEvent.tag));
 
 	        var tag = nfcEvent.tag,
 	        records = tag.ndefMessage || [];
 
-	        // BB7 has different names, copy to Android names
-	        /*if (tag.serialNumber) {
-	            tag.id = tag.serialNumber;
-	            tag.isWritable = !tag.isLocked;
-	            tag.canMakeReadOnly = tag.isLockable;
-	        }*/
+	      
 	        
-	        alert("Ndef Record : "+Ndef.bytesToString(records[0].payload));
-	        console.log("Records : "+Ndef.bytesToString(records[0].payload));
+	        var ndefRecord = "";
+	       
+	        ndefRecord = nfc.decodePayload(records[0]);
 	        
-	        id = Ndef.bytesToString(records[0].payload);
+	        
+	        console.log("Records : "+ndefRecord);
+	        
+	        id = ndefRecord;
+	        
 	        var flag=0;
 	        
 	        for(var i=0;i<patientDetails.length;i++)
 	    	{
 	    	  if(id==patientDetails[i])
+	    		  
 	    	  flag=1;	  
 	    	}
-              
+            
 	        if(flag==1)
 	        {
-	        	alert("Patient Authorized");
+	        
+	        	/*alert("Patient Authorized");*/
+	        	console.log("Patient Authorized");
 	       		var paneltab = Ext.create('MyApp.view.MainTabPanel');
+	       		/**/
 	        	Ext.getCmp('loginForm').destroy();
-            	Ext.Viewport.add(paneltab); 	
+            	Ext.Viewport.add(paneltab); 
+            	app.setPatient(id);
 	       	}
 	        else
 	        {
 	        	alert("Un-Authorized Patient");
-	        	Ext.getCmp('maindata').setMasked(true);
+	        	Ext.getCmp('loginForm').setMasked(true);
 	        }
 	        
 	    },
@@ -449,6 +454,18 @@ var app = {
 	        	alert("Un-Authorized Patient tag");
 	        	Ext.getCmp('maindata').setMasked(true);
 	        }
-		} 
+		},
+	   setPatient : function(id)
+	   {
+		   for(var i=0;i<patientDetails.length;i++)
+       	{
+       	    if(id==patientDetails[i])
+       	    	{
+       	    	 Ext.getCmp('firstName').setHtml(patientDetails[i+1]);
+       	    	Ext.getCmp('lastName').setHtml(patientDetails[i+2]);
+       	    	}
+  
+       	}
+	   }
 		
 	} 
