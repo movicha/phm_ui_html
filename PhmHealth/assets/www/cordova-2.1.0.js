@@ -296,10 +296,6 @@ var ndef = {
         return ndef_message;
     },
     
-    
-   
-
-    
     /**
      * Decode the bit flags from a TNF Byte.
      * 
@@ -457,40 +453,7 @@ var nfc = {
             bytesAsHexString += hexstring;
         }
         return bytesAsHexString;
-    },
-    
-    decodePayload : function (record) {
-    	var recordType = nfc.bytesToString(record.type),
-    	payload;
-
-    	// TODO extract this out to decoders that live in NFC code
-    	// TODO add a method to ndefRecord so the helper
-    	// TODO doesn't need to do this
-
-    	if (recordType === "T") {
-    	var langCodeLength = record.payload[0],
-    	text = record.payload.slice((1 + langCodeLength), record.payload.length);
-    	payload = nfc.bytesToString(text);
-
-    	} else if (recordType === "U") {
-    	var identifierCode = record.payload.shift(),
-    	uri = nfc.bytesToString(record.payload);
-
-    	if (identifierCode !== 0) {
-    	// TODO decode based on URI Record Type Definition
-    	console.log("WARNING: uri needs to be decoded");
-    	}
-    	//payload = "<a href='" + uri + "'>" + uri + "<\/a>";
-    	payload = uri;
-
-    	} else {
-
-    	// kludge assume we can treat as String
-    	payload = nfc.bytesToString(record.payload);
-    	}
-
-    	return payload;
-    	}
+    }
     
 };
 

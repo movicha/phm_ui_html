@@ -14,10 +14,15 @@
  */
 
 Ext.Loader.setConfig({
-    enabled: true
+    enabled: true,
+	paths   : {
+        Ux : 'Ux'
+    }
 });
 
-
+Ext.require([
+    'Ux.layout.Accordion'
+]);
 
 Ext.application({
     models: [

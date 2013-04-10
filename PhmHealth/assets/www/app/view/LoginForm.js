@@ -13,8 +13,10 @@
  * Do NOT hand edit this file.
  */
 
-var patientDetails = new Array();
+var patientDetails = {};
 var tagFlag=0;
+var firstName="";
+var doctorId="";
 
 Ext.define('MyApp.view.LoginForm', {
     extend: 'Ext.Container',
@@ -142,9 +144,12 @@ Ext.define('MyApp.view.LoginForm', {
             cls:"maskd"
         });
 
+	firstName=Ext.getCmp('user').getValue();
+	
+	
     Ext.Ajax.request ({ 
         
-        url : 'http://204.13.110.186:9000/1/login',
+        url : phmHealth.URLs.loginURL,
         timeout : 180000,
         method : 'POST',
         type:'ajax',
@@ -155,7 +160,7 @@ Ext.define('MyApp.view.LoginForm', {
          usertype :'1'
         },
                  success: function(response) {
-                 
+                  
                  	Ext.getCmp('loginForm').setMasked(false);	
                 	 
                 	 if(response.responseText.indexOf("AutenticationResponse") !== -1)
@@ -184,10 +189,6 @@ Ext.define('MyApp.view.LoginForm', {
                      	Ext.getCmp('loginForm').setMasked(false);
                      }, 20000);
 
-                	 /*
-                     var paneltab = Ext.create('MyApp.view.MainTabPanel');
-                     Ext.getCmp('loginForm').destroy();
-                     Ext.Viewport.add(paneltab);*/
                      requestPosition();
                 	}
                  },
@@ -201,19 +202,17 @@ Ext.define('MyApp.view.LoginForm', {
         	
         	function parse(jss) {	
         	  var j=0;
+        	  doctorId=jss.userid.toString();;
         	for(var i=0;i<jss.patients.length;i++)
         	{
-        	    var patientId= jss.patients[i].patientid;
-        	    var patientFirstName = jss.patients[i].firstname;
-        	    var patientLastName = jss.patients[i].lastname;
-        	    patientDetails[j++]=patientId;
-        	    patientDetails[j++]=patientFirstName;
-        	    patientDetails[j++]=patientLastName;
-        	    
-        	    /*console.log("PatientId : "+patientId+" PatientName : "+patientName) */
-        	    console.log("Patient details in global var : "+patientDetails);
+        	    var patientId= jss.patients[i].patientid;   	    
+        	    patientDetails[patientId] = jss.patients[i];
         	 
         	}
+        	
+        	 for(var key in patientDetails)
+        	 console.log("Patient details in global var : "+Ext.JSON.encode(patientDetails[key]));
+        	
         	}
  
     }

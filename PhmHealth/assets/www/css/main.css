@@ -46,6 +46,7 @@ border-bottom-right-radius: 1px;
 border-radius:none;
 color:#fff;
 font-size:80%;
+height:40px;
  font-family: 'ColaborateThinRegular';
 
 }
@@ -149,6 +150,83 @@ background: rgba(238, 238, 238, 1) center center no-repeat;
 	
 	
 }
+.error{
+font-size:80%;
+	color:#e64f2b;
+	font-family: 'ColaborateRegular';
+text-align:center;
+}
+.maskd{
+background: rgba(238, 238, 238, 0.7) center center no-repeat !important;
+}
+
+
+.demolabel{
+width:45%;
+font-size:85%;
+	color:#272727;
+	font-family: 'ColaborateRegular';
+	padding-left:10px;
+	padding-top:5px;
+	text-align:right;
+	
+
+
+}
+
+.demodata{
+font-size:85%;
+	color:#272727;
+	font-family: 'ColaborateRegular';
+	padding-left:10px;
+	padding-top:5px;
+
+}
+
+.editedfieldset, .editedfieldset.x-form-fieldset-inner{
+border: none !important;
+background: none !important;
+padding: 0;
+-webkit-border-radius: 0 !important;
+border-radius: 0 !important;
+overflow: hidden;
+}
+
+
+.topbar{
+
+background-image: linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+background-image: -o-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+background-image: -moz-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+background-image: -webkit-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+background-image: -ms-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.38, #FD5223),
+	color-stop(0.85, #FB8868)
+);
+
+height:35px !important;
+border-bottom: 0px solid !important;
+color:#343434;
+line-height:30px;
+font-size:75% !important;
+text-shadow: rgba(0, 0, 0, 0) 0 -0.00em 0 !important;
+font-family: 'ColaborateRegular' !important;
+
+}
+
+.x-toolbar-dark .x-title{
+text-shadow: rgba(0, 0, 0, 0) 0 -0.00em 0 !important;
+}
+
+.x-scroll-bar-y.active { 
+width: 0px !important; /*CHANGE: replace width: 6px;*/ 
+}
+
 
 .x-list .x-list-item.x-item-selected .x-dock-horizontal {
 	background-image: none;
@@ -197,12 +275,13 @@ margin: 0.5em 0.5em 0 0;
 content: "";
 position: absolute;
 width: 0.87em;
-height: 1.8em;
+height: 40px;
 top: 0.01em;
-left: auto;
+/*left: auto;*/
+right:-11px;
 z-index: 2;
 -webkit-mask: 0.125em 0 url('../images/button.png') no-repeat;
--webkit-mask-size: 0.807em 1.8em;
+-webkit-mask-size: 0.807em 40px;
 overflow: hidden;
 background-image: linear-gradient(bottom, #FD5223 38%, #FB8868 85%) !important;
 background-image: -o-linear-gradient(bottom, #FD5223 38%, #FB8868 85%);

@@ -1,0 +1,18 @@
+.x-layout-accordion-item.x-layout-accordion-item-anim {
+    -webkit-transition : height 300ms ease-in;
+}
+
+.x-accordion-arrow {
+	padding-left            : 0.6em !important;
+	padding-right           : 0.6em !important;
+    background         : transparent url('../images/arrow.png')  no-repeat center center !important;
+
+    /* For arrow animation */
+    -webkit-transition : -webkit-transform 300ms ease-in;
+}
+
+.x-accordion-arrow-expanded {
+    -webkit-transform : rotate(90deg);
+}
+
+.x-layout-accordion-item { overflow: hidden; }
