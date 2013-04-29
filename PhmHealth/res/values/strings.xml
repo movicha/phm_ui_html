@@ -4,5 +4,7 @@
     <string name="app_name">PhmHealth</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="googleDocId">dDI5UEVQTmV3NDFoVUtyRFA2bU1waGc6MQ</string>
+    <string name="crashReportFlag">true</string>
 
 </resources>

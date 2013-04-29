@@ -18,10 +18,66 @@ Ext.define('MyApp.model.Notes', {
 
     config: {
         fields: [
-            {
-                name: 'title',
-                type: 'string'
-            }
-        ]
+                   {
+                	   name : 'dateOfBirth',
+                	   type : 'string'
+                   },                
+                   {
+                       name : 'streetaddress',
+                       type : 'string'
+                   },                 
+                   {
+                	   name : 'phone',
+                	   type : 'string'
+                   },                 
+                   {
+                	   name : 'maritalstatus',
+                	   type : 'string'
+                   },
+                   {
+                	   name : 'patientid',
+                	   type : 'string'
+                   },
+                   {
+                	   name : 'zipcode',
+                	   type : 'string'
+                   },                 
+                   {
+                	   name : 'state',
+                	   type : 'string'
+                   }, 
+                   {
+                	   name : 'gender',
+                	   type : 'string'
+                   },
+                   {
+                	   name : 'lastname',
+                	   type : 'string'
+                   },
+                   {
+                	   name : 'firstname',
+                	   type : 'string'
+                   },
+                   {
+                	   name : 'Country',
+                	   type : 'string'
+                   },
+	               {
+	            	   name : 'city',
+	            	   type : 'string'
+	               },
+	               {
+                	   name : 'ScheduleDuration',
+                	   type : 'string'
+                   },
+                   {
+                	   name : 'ScheduleId',
+                	   type : 'string'
+                   },
+                   {
+                	   name : 'ScheduleTime',
+                	   type : 'string'
+                   }
+        ],
     }
 });

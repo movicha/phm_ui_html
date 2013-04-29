@@ -20,16 +20,65 @@ Ext.define('MyApp.store.Notes', {
         'MyApp.model.Notes'
     ],
 
-    config: {
+    config: { 
         data: [
-            {
-                title: 'Evaluation Details'
+            /*{
+                title: 'Joe Bloggs',
+                narrative: 'Woodside, CA',
+                time: '10.00 AM'
             },
             {
-                title: 'Billable Activity'
-            }
+                title: 'Catherina Fake',
+                narrative: 'San Fransisco, CA',
+                time: '11.00 AM'
+            },
+            {
+                title: 'Note 3',
+                narrative: 'narrative 3',
+                time: '12.00 PM'
+            },
+            {
+                title: 'Note 4',
+                narrative: 'narrative 4',
+                time: '01.00 PM'
+            },
+            {
+                title: 'Note 5',
+                narrative: 'narrative 5',
+                time: '<span class=\'none\'>None Assigned<span>'
+            },
+            {
+                title: 'Note 6',
+                narrative: 'narrative 6',
+                time: '<span class=\'none\'>None Assigned<span>'
+            }*/
         ],
         model: 'MyApp.model.Notes',
         storeId: 'Notes'
+    /*    sorters: {
+        }/*,
+        proxy:{
+            type:'ajax',
+            url:phmHealth.URLs.loginURL,
+            actionMethods : {
+              create : 'POST',
+              read : 'POST',
+              update : 'POST',
+              destroy : 'POST'
+            },
+            reader:{
+                type:'json',
+                root: 'patients'
+            },
+            extraParams:{
+                format:'json'
+            },
+            listeners:{
+                exception:function(proxy, response, orientation){
+                    console.error('Failure Notification', response.responseText);
+                    Ext.Msg.alert('Loading failed', response.responseText);
+                }
+            }
+        }*/
     }
 });

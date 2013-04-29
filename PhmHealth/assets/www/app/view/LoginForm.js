@@ -13,12 +13,9 @@
  * Do NOT hand edit this file.
  */
 
-var patientDetails = new Array();
-var tagFlag=0;
-
 Ext.define('MyApp.view.LoginForm', {
     extend: 'Ext.Container',
-
+    alias : 'widget.login',
     config: {
         id: 'loginForm',
         layout: {
@@ -104,6 +101,7 @@ Ext.define('MyApp.view.LoginForm', {
                                     },
                                     {
                                         xtype: 'button',
+                                        id:'loginButton',
                                         cls: 'gradient',
                                         itemId: 'mybutton',
                                         left: '',
@@ -120,102 +118,6 @@ Ext.define('MyApp.view.LoginForm', {
                     }
                 ]
             }
-        ],
-        listeners: [
-            {
-                fn: 'onMybuttonTap',
-                single: false,
-                event: 'tap',
-                delegate: '#mybutton'
-            }
         ]
-    },
-    onMybuttonTap: function(button, e, options) {
-	 
-	 Ext.getCmp('status').setHtml('');
-	 Ext.getCmp('loginForm').setMasked(
-        {
-            xtype:'loadmask',
-            message:'',
-            fullscreen: true,
-            html:"",
-            cls:"maskd"
-        });
-
-    Ext.Ajax.request ({ 
-        
-        url : 'http://204.13.110.186:9000/1/login',
-        timeout : 180000,
-        method : 'POST',
-        type:'ajax',
-        
-        jsonData : {
-         username : Ext.getCmp('user').getValue(),
-         password : Ext.getCmp('pass').getValue(),
-         usertype :'1'
-        },
-                 success: function(response) {
-                 
-                 	Ext.getCmp('loginForm').setMasked(false);	
-                	 
-                	 if(response.responseText.indexOf("AutenticationResponse") !== -1)
-                		 {
-                	 		Ext.getCmp('status').setHtml(Ext.JSON.decode(response.responseText).AutenticationResponse.status);
-                		 }
-                	 else
-                	{	 	 
-                	 console.log(response.responseText);
-                	 parse(Ext.JSON.decode(response.responseText));
-                	 
-                	 console.log("newNoteCommanddcdc");
-                	 
-                	 Ext.getCmp('loginForm').setMasked(
-                     {
-                        xtype:'loadmask',
-                        message:'Awaiting NFC Tag in (Patient)',
-                        fullscreen: true,
-                        html:"<img src='images/loading3.gif'/>",
-                        indicator:false
-                     });
-                     
-                     app.initialize(); 
-                     
-                     setTimeout(function() {
-                     	Ext.getCmp('loginForm').setMasked(false);
-                     }, 20000);
-
-                	 /*
-                     var paneltab = Ext.create('MyApp.view.MainTabPanel');
-                     Ext.getCmp('loginForm').destroy();
-                     Ext.Viewport.add(paneltab);*/
-                     requestPosition();
-                	}
-                 },
-                 failure: function(response) {
-                   Ext.getCmp('loginForm').setMasked(false);
-                   Ext.getCmp('status').setHtml("Server Error. Try Again.");
-                   console.log(response.responseText);
-                 }
-                    
-             });
-        	
-        	function parse(jss) {	
-        	  var j=0;
-        	for(var i=0;i<jss.patients.length;i++)
-        	{
-        	    var patientId= jss.patients[i].patientid;
-        	    var patientFirstName = jss.patients[i].firstname;
-        	    var patientLastName = jss.patients[i].lastname;
-        	    patientDetails[j++]=patientId;
-        	    patientDetails[j++]=patientFirstName;
-        	    patientDetails[j++]=patientLastName;
-        	    
-        	    /*console.log("PatientId : "+patientId+" PatientName : "+patientName) */
-        	    console.log("Patient details in global var : "+patientDetails);
-        	 
-        	}
-        	}
- 
     }
-
 });

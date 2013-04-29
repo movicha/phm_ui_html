@@ -13,26 +13,49 @@
  * Do NOT hand edit this file.
  */
 
+//Global Variables
+var patientDetails = {};
+var pd=[];
+var tagFlag=0;
+var firstName="";
+var doctorId="";
+var tagPage=0;
+var utcOffset="";
+var navFlag=0;
+
 Ext.Loader.setConfig({
-    enabled: true
+    enabled: true,
+	paths   : {
+        Ux : 'Ux'
+    }
 });
 
-
+Ext.require([
+    'Ux.layout.Accordion'
+]);
 
 Ext.application({
     models: [
-        'Notes'
+        'Notes',
+        'User',
+		'demographics'
     ],
     stores: [
-        'Notes'
+        'Notes',
+        'demographics'
     ],
     views: [
         'LoginForm',
-        'MainTabPanel'
+		'patientPanel',
+        'MainTabPanel',
+        'patientdetailPanel',
+        'someForm',
+        'Mappop'
     ],
     name: 'MyApp',
     controllers: [
-        'MyController'
+        'MyController',
+        'User'
     ],
 
     launch: function() {

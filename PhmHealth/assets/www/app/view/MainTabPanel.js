@@ -14,6 +14,8 @@
  */
 
 var id="";
+var visitId="";
+var duratn="";
 
 Ext.define('MyApp.view.MainTabPanel', {
     extend: 'Ext.Container',
@@ -50,12 +52,30 @@ Ext.define('MyApp.view.MainTabPanel', {
                         flex: 1,
                         id: 'maindata',
                         itemId: 'mypanel6',
-                        style: '',
-                        scrollable: 'vertical',
+                        scrollable: {
+                            directionLock: true,
+                          direction: 'vertical',
+                          momentumEasing:  {
+                           momentum: {
+                             acceleration: 100,
+                             friction: 0.8
+                           },
+                           bounce: {
+                           acceleration: 0.0001,
+                           springTension: 0.9999,
+                           },
+                           minVelocity: 3
+                           },
+                           outOfBoundRestrictFactor: 0  
+                         },
+						 layout: {
+                                    type: 'vbox'
+                                },
                         items: [
                             {
                                 xtype: 'panel',
                                 height: 20,
+								flex:0,
                                 layout: {
                                     type: 'hbox'
                                 },
@@ -85,6 +105,7 @@ Ext.define('MyApp.view.MainTabPanel', {
                             {
                                 xtype: 'panel',
                                 height: 25,
+								flex:0,
                                 layout: {
                                     type: 'hbox'
                                 },
@@ -115,7 +136,7 @@ Ext.define('MyApp.view.MainTabPanel', {
                                                 event: 'painted'
                                             }
                                         ]
-                                    },
+                                    }/*,
                                     {
                                         xtype: 'label',
                                         id : 'lastName',
@@ -125,13 +146,15 @@ Ext.define('MyApp.view.MainTabPanel', {
                                         ],
                                         html: 'lastName',
                                         style: 'text-align:right;margin-right:20px;'
-                                    }
+                                    }*/
                                 ]
                             },
                             {
                                 xtype: 'panel',
                                 height: 20,
-                                style: 'margin-top:10%;',
+                                width:300,
+								flex:0,
+                                style: 'margin-top:10%;margin-left:auto;margin-right:auto;',
                                 layout: {
                                     type: 'hbox'
                                 },
@@ -151,6 +174,8 @@ Ext.define('MyApp.view.MainTabPanel', {
                             {
                                 xtype: 'panel',
                                 itemId: 'mypanel9',
+								id:'full',
+								flex:0,
                                 layout: {
                                     type: 'vbox'
                                 },
@@ -174,39 +199,288 @@ Ext.define('MyApp.view.MainTabPanel', {
                                         ]
                                     },
                                     {
-                                        xtype: 'panel',
-                                        height: 150,
-                                        itemId: 'mypanel12',
-                                        layout: {
-                                            type: 'hbox'
-                                        },
-                                        scrollable: false,
+                                        xtype: 'carousel',
+										id:'carosel',
+										minHeight:350,
+                                        style: 'padding:12px;',
                                         items: [
-                                            {
-                                                xtype: 'list',
-                                                hidden: true,
-                                                style: 'margin-top:5%;',
-                                                ui: 'round',
-                                                width: '100%',
-                                                modal: false,
-                                                scrollable: 'direction: \'horizontal\',\r\n  directionLock: true,\r\n  momentumEasing:  {\r\n     momentum: {\r\n       acceleration: 30,\r\n       friction: 0.5\r\n     },\r\n     bounce: {\r\n        acceleration: 0.0001,\r\n        springTension: 0.9999,\r\n     },\r\n     minVelocity: 5\r\n  },\r\n  outOfBoundRestrictFactor: 0',
-                                                emptyText: '</pre> <div class="notes-list-empty-text">No notes found.</div> <pre>',
-                                                itemCls: 'gh',
-                                                itemTpl: [
-                                                    '',
-                                                    '<div class="list-item-title">{title}</div>',
-                                                    ''
-                                                ],
-                                                scrollToTopOnRefresh: false,
-                                                store: 'Notes',
-                                                disableSelection: false,
-                                                itemHeight: 50,
-                                                onItemDisclosure: true,
-                                                refreshHeightOnUpdate: false,
-                                                variableHeights: false
+                                            
+                                            
+											{
+                                                xtype: 'container',
+												layout     : {
+																type : 'accordion',
+																mode : 'SINGLE'
+																
+															},
+												listeners: {
+															painted: function() {
+																this.layout.checkMode(this);
+															}},				
+			
+			
+			
+												items: [
+												{
+												title : 'Patient Demographics',
+												items : [
+													{
+                                                xtype: 'panel',
+                                                border: '',
+                                                itemId: 'mypanel12',
+                                                style: '',
+                                                width: '',
+                                                layout: {
+                                                    type: 'vbox'
+                                                },
+                                                scrollable: false,
+                                                items: [
+                                                   
+                                                    {
+                                                        xtype: 'panel',
+														style: 'padding-top:8px;',
+                                                        items: [
+                                                            {
+                                                                xtype: 'fieldset',
+                                                                baseCls: 'editedfieldset',
+                                                                margin: '',
+                                                                ui: 'light',
+                                                                layout: {
+                                                                    type: 'hbox'
+                                                                },
+                                                                items: [
+                                                                    {
+                                                                        xtype: 'label',
+                                                                        cls: [
+                                                                            'demolabel'
+                                                                        ],
+                                                                        height: 25,
+                                                                        html: 'Name:'
+                                                                    },
+                                                                    {
+                                                                        xtype: 'label',
+                                                                        id : 'name',
+                                                                        cls: [
+                                                                            'demodata'
+                                                                        ],
+                                                                        height: 25,
+                                                                        html: ''
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                xtype: 'fieldset',
+                                                                baseCls: 'editedfieldset',
+                                                                margin: '',
+                                                                ui: 'light',
+                                                                layout: {
+                                                                    type: 'hbox'
+                                                                },
+                                                                items: [
+                                                                    {
+                                                                        xtype: 'label',
+                                                                        cls: [
+                                                                            'demolabel'
+                                                                        ],
+                                                                        height: 25,
+                                                                        html: 'Phone:'
+                                                                    },
+                                                                    {
+                                                                        xtype: 'label',
+                                                                        id : 'phone',
+                                                                        cls: [
+                                                                            'demodata'
+                                                                        ],
+                                                                        height: 25,
+                                                                        html: ''
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                xtype: 'fieldset',
+                                                                baseCls: 'editedfieldset',
+                                                                margin: '',
+                                                                ui: 'light',
+                                                                layout: {
+                                                                    type: 'hbox'
+                                                                },
+                                                                items: [
+                                                                    {
+                                                                        xtype: 'label',
+                                                                        cls: [
+                                                                            'demolabel'
+                                                                        ],
+                                                                        height: 25,
+                                                                        html: 'Address:'
+                                                                    },
+                                                                    {
+                                                                        xtype: 'textareafield',
+                                                                        id : 'address',
+                                                                        flex: 0,
+                                                                        height: '',
+                                                                        maxHeight: 65,
+                                                                        minHeight: 50,
+                                                                        style: 'height:auto;resize:none;background:transparent;width:50%;',
+                                                                        clearIcon: false,
+                                                                        inputCls: 'demodata',
+                                                                        value: '',
+																		readOnly: true
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                xtype: 'fieldset',
+                                                                baseCls: 'editedfieldset',
+                                                                margin: '',
+                                                                ui: 'light',
+                                                                layout: {
+                                                                    type: 'hbox'
+                                                                },
+                                                                items: [
+                                                                    {
+                                                                        xtype: 'label',
+                                                                        cls: [
+                                                                            'demolabel'
+                                                                        ],
+                                                                        height: 25,
+                                                                        html: 'Birthdate:'
+                                                                    },
+                                                                    {
+                                                                        xtype: 'label',
+                                                                        id : 'birthDate',
+                                                                        cls: [
+                                                                            'demodata'
+                                                                        ],
+                                                                        height: 25,
+                                                                        html: ''
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                xtype: 'fieldset',
+                                                                baseCls: 'editedfieldset',
+                                                                margin: '',
+                                                                ui: 'light',
+                                                                layout: {
+                                                                    type: 'hbox'
+                                                                },
+                                                                items: [
+                                                                    {
+                                                                        xtype: 'label',
+                                                                        cls: [
+                                                                            'demolabel'
+                                                                        ],
+                                                                        height: 25,
+                                                                        html: 'Gender:'
+                                                                    },
+                                                                    {
+                                                                        xtype: 'label',
+                                                                        id : 'gender',
+                                                                        cls: [
+                                                                            'demodata'
+                                                                        ],
+                                                                        height: 25,
+                                                                        html: ''
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                xtype: 'fieldset',
+                                                                baseCls: 'editedfieldset',
+                                                                margin: '',
+                                                                ui: 'light',
+                                                                layout: {
+                                                                    type: 'hbox'
+                                                                },
+                                                                items: [
+                                                                    {
+                                                                        xtype: 'label',
+                                                                        cls: [
+                                                                            'demolabel'
+                                                                        ],
+                                                                        height: 25,
+                                                                        html: 'Marital Status:'
+                                                                    },
+                                                                    {
+                                                                        xtype: 'label',
+                                                                        id : 'maritalStatus',
+                                                                        cls: [
+                                                                            'demodata'
+                                                                        ],
+                                                                        height: 25,
+                                                                        html: ''
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        xtype: 'list',
+                                                        flex: 1,
+                                                        hidden: true,
+                                                        style: 'margin-top:5%;',
+                                                        ui: 'round',
+                                                        width: '100%',
+                                                        modal: false,
+                                                        scrollable: 'direction: \'horizontal\',\r\n  directionLock: true,\r\n  momentumEasing:  {\r\n     momentum: {\r\n       acceleration: 30,\r\n       friction: 0.5\r\n     },\r\n     bounce: {\r\n        acceleration: 0.0001,\r\n        springTension: 0.9999,\r\n     },\r\n     minVelocity: 5\r\n  },\r\n  outOfBoundRestrictFactor: 0',
+                                                        emptyText: '</pre> <div class="notes-list-empty-text">No notes found.</div> <pre>',
+                                                        itemCls: 'gh',
+                                                        itemTpl: [
+                                                            '',
+                                                            '<div class="list-item-title">{title}</div>',
+                                                            ''
+                                                        ],
+                                                        scrollToTopOnRefresh: false,
+                                                        store: 'Notes',
+                                                        disableSelection: false,
+                                                        itemHeight: 50,
+                                                        onItemDisclosure: true,
+                                                        refreshHeightOnUpdate: false,
+                                                        variableHeights: false
+                                                    }
+                                                ]
+                                            }
+											]
+											
+											},
+											
+											{
+														title : 'Other Data',
+														items : [
+															{
+																xtype: 'panel',
+																border: '',
+																height: 100,
+																itemId: 'mypanel12',
+																style: '',
+																width: '',
+																layout: {
+																	type: 'vbox'
+																}
+															},
+															]
+											
+											}
+												
+												]
+                                            },
+											{
+                                                xtype: 'panel',
+                                                style: '',
+                                                items: [
+                                                    {
+                                                        xtype: 'button',
+                                                        cls: 'gradient',
+                                                        itemId: 'endvisit',
+                                                        style: 'margin-top:20px;margin-left:auto;margin-right:auto;margin-bottom:10px;',
+                                                        ui: 'forward',
+                                                        width: 135,
+                                                        text: 'END ENCOUNTER'
+                                                    }
+                                                ]
                                             }
                                         ]
-                                    },
+                                    }/*,
                                     {
                                         xtype: 'button',
                                         flex: 0,
@@ -216,7 +490,7 @@ Ext.define('MyApp.view.MainTabPanel', {
                                         ui: 'forward',
                                         width: 100,
                                         text: 'END VISIT'
-                                    }
+                                    }*/
                                 ]
                             }
                         ],
@@ -294,7 +568,11 @@ Ext.define('MyApp.view.MainTabPanel', {
         clearInterval(stopWatchInt);
         var watch = Ext.getCmp('timer');
 
-        alert(watch.getInnerHtmlElement().dom.innerHTML);
+        var timer = watch.getInnerHtmlElement().dom.innerHTML;   
+        var sec = timer.split(':'); 
+
+        duratn = (+sec[0]) * 60 * 60 + (+sec[1]) * 60 + (+sec[2]);
+        duratn = duratn.toString();
 
 
         Ext.getCmp('maindata').setMasked(
@@ -381,58 +659,65 @@ var app = {
 	    },
 	    onNfc: function (nfcEvent) {
 	        console.log("on Nfc : "+JSON.stringify(nfcEvent.tag));
-	        //alert("onNfc Called. the tag is : "+ JSON.stringify(nfcEvent.tag), function() {}, "pHmHealth");
+	        navigator.notification.alert("This card is not ndef formatted. ", function() {}, "pHmHealth");
 	    },
        onNdef: function (nfcEvent) {
-	        
+	       
+    	   if(navFlag==1)
+          {
+    	   
     	   if(tagFlag==0)
     	  {	   
 	        console.log("On Ndef : "+JSON.stringify(nfcEvent.tag));
 
 	        var tag = nfcEvent.tag,
 	        records = tag.ndefMessage || [];
-
-	      
-	        
+	 	        
 	        var ndefRecord = "";
 	       
 	        ndefRecord = nfc.decodePayload(records[0]);
 	        
-	        
+	        if (ndefRecord=="")
+	       {
+	        	navigator.notification.alert("No patient-id found on card. ", function() {}, "pHmHealth");	
+	       }
+	       
+	        else
+	       { 	
 	        console.log("Records : "+ndefRecord);
 	        
 	        id = ndefRecord;
 	        
 	        var flag=0;
 	        
-	        for(var i=0;i<patientDetails.length;i++)
-	    	{
-	    	  if(id==patientDetails[i])
+	        console.log("Id and tplid : "+id+" : "+tplPatientId);
+	        
+	       /* for(var key in patientDetails)
+	       {
+	    	  if(id==patientDetails[key].patientid)*/
+	        
+	          if(id.trim()==tplPatientId.trim())
 	    		  
 	    	  flag=1;	  
-	    	}
+	       /*}*/
             
 	        if(flag==1)
-	        {
-	        
-	        	/*alert("Patient Authorized");*/
+	        {        
 	        	console.log("Patient Authorized");
-	       		var paneltab = Ext.create('MyApp.view.MainTabPanel');
-	       		/**/
-	        	Ext.getCmp('loginForm').destroy();
-            	Ext.Viewport.add(paneltab); 
-            	app.setPatient(id);
-            	tagFlag=1;
-            	
-            	
+	       		
+	       		
+            	app.startEncounter(id);
+            
+                    	
 	       	}
 	        else
 	        {
 	        	console.log("Un-Authorized Patient");
-	        	/*alert("Un-Authorized Patient");
-	        	/*Ext.getCmp('loginForm').setMasked(true);*/
+	        	var pt = patientDetails[tplPatientId];
+	       // 	navigator.notification.alert("Please tagin "+pt.firstname+" "+pt.lastname+"'s card only.", function() {}, "pHmHealth");
+	        	navigator.notification.alert("Un-Authorized Patient.", function() {}, "pHmHealth");
 	        }
-	        
+    	  }  
 	    }
     	   else
     	  {
@@ -444,55 +729,120 @@ var app = {
    	       
    	        ndefRecord = nfc.decodePayload(records[0]);
    	        
+   	     if (ndefRecord=="")
+	       {
+	        	navigator.notification.alert("No patient-id found on card. ", function() {}, "pHmHealth");	
+	       }
+	       
+	        else
+	       { 	
    	        
-   	        if(id == ndefRecord)
+   	        if(id.trim() == ndefRecord.trim())
    	        	{
    	        	 console.log("Patient tag out successful");
-   	        	 window.location="app.html";
+   	        	 app.endEncounter(id);
    	        	}
    	        else
    	        	{
-   	        	 alert("Please tag out with the card used for tag-in ");
+   	        	navigator.notification.alert("Please tag out with the card used for tag-in.", function() {}, "pHmHealth");
    	        	}
     		   
     	  }
+    	 }
+        }
+    	   else
+    		   {
+    		   navigator.notification.alert("Please click on tag-in button and then swipe the card.", function() {}, "pHmHealth");
+    		   }
        },
-        /*tagOut: function () {
-        	document.addEventListener('deviceready', this.devicetagout, true);
-	        
-	    },
-	    devicetagout : function () {
-		    
-	        navigator.nfc.addMimeTypeListener("text/pg", readTag, works ,fail);       
-	},
-	    readTag : function(event) {
-			var tag=event.tag,
-			records = tag.ndefMessage || [];
-			
-			if(id == Ndef.bytesToString(records[0].payload))
-			  {
-	          	alert("Patient Tag out successful");
-	        	var paneltab = Ext.create('MyApp.view.MainTabPanel');
-                Ext.getCmp('loginForm').destroy();
-                Ext.Viewport.add(paneltab);
-			  }
-	        else
-	        {
-	        	alert("Un-Authorized Patient tag");
-	        	Ext.getCmp('maindata').setMasked(true);
-	        }
-		},*/
 	   setPatient : function(id)
 	   {
-		   for(var i=0;i<patientDetails.length;i++)
-       	{
-       	    if(id==patientDetails[i])
-       	    	{
-       	    	 Ext.getCmp('firstName').setHtml(patientDetails[i+1]);
-       	    	Ext.getCmp('lastName').setHtml(patientDetails[i+2]);
-       	    	}
-  
-       	}
-	   }
-		
+		   var patient=patientDetails[id];
+		   
+		   if(patient!=null)
+			   {
+			    Ext.getCmp('firstName').setHtml(firstName);
+      	    	
+      	    	Ext.getCmp('name').setHtml(patient.firstname+" "+patient.lastname);
+      	    	Ext.getCmp('phone').setHtml(patient.phone);
+      	    	Ext.getCmp('address').setValue(patient.streetaddress+",\n"+patient.city+",\n"+patient.state+" "+patient.zipcode+","+patient.Country);
+      	    	Ext.getCmp('birthDate').setHtml(patient.dateOfBirth);
+      	    	Ext.getCmp('gender').setHtml(patient.gender);
+      	    	Ext.getCmp('maritalStatus').setHtml(patient.maritalstatus);
+      	    	
+      	    	visitId=uniqueId; 
+			   }
+	   },
+	  startEncounter : function(id)
+	  {
+		  console.log(doctorId+"--"+id+"--"+uniqueId);
+		  Ext.Ajax.request ({ 
+		        
+		        url : phmHealth.URLs.startEncounterURL,
+		        timeout : 180000,
+		        method : 'POST',
+		        type:'ajax',
+		        
+		        jsonData : {
+		         providerid: doctorId.toString(),
+		         patientid : id.toString(),
+		         scheduleid : uniqueId.toString()
+		        },
+		                 success: function(response) {
+		                	 var jsonResponse = JSON.parse(response.responseText);
+		                	// visitId=jsonResponse.startTimerServiceRes.visitid.toString();
+		                	 console.log("Response : "+Ext.JSON.encode(jsonResponse));
+		                	 
+		                	 if(tagPage==0)
+		      	               Ext.getCmp('patientPanel').destroy();
+		      	       		else
+		      	       		   Ext.getCmp('patientdetailPanel').destroy();
+		      	       		 
+		      	       		var paneltab = Ext.create('MyApp.view.MainTabPanel');
+		      	       		
+		                  	Ext.Viewport.add(paneltab); 	                  			                	
+		                	
+		                  	app.setPatient(uniqueId);
+		                  	
+		                	tagFlag=1;	    
+		                  	
+		                	 
+		                 },
+		                 failure: function(response) {
+		                   console.log(response.responseText);
+		                   navigator.notification.alert("Server error!! Please try again.", function() {}, "pHmHealth");
+		                 }
+		                    
+		             }); 
+	  },
+	  endEncounter : function(id)
+	  {
+		  navFlag=0;
+		  console.log(doctorId+"--"+id+"--"+visitId+"--"+duratn);
+		  Ext.Ajax.request ({ 
+		        
+		        url : phmHealth.URLs.endEncounterURL,
+		        timeout : 180000,
+		        method : 'POST',
+		        type:'ajax',
+		        
+		        jsonData : {
+		         providerid: doctorId.toString(),
+		         patientid : id.toString(),
+		         visitid : visitId.toString(),
+		         duration : duratn
+		        },
+		                 success: function(response) {
+		                	 var jsonResponse = JSON.parse(response.responseText);
+		                	console.log("Response : "+Ext.JSON.encode(jsonResponse));
+		                	window.location="app.html";
+		                	 
+		                 },
+		                 failure: function(response) {
+		                   console.log(response.responseText);
+		                   navigator.notification.alert("Server error!! Please try again.", function() {}, "pHmHealth");
+		                 }
+		                    
+		             }); 
+	  }		
 	} 

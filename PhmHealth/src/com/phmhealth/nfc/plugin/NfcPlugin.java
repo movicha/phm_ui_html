@@ -335,9 +335,11 @@ public class NfcPlugin extends CordovaPlugin {
     }
 
     void parseMessage() {
+    	
         cordova.getThreadPool().execute(new Runnable() {
             @Override
-            public void run() {
+            public void run() {            
+            	
                 Log.d(TAG, "parseMessage " + getIntent());
                 Intent intent = getIntent();
                 String action = intent.getAction();
@@ -352,18 +354,40 @@ public class NfcPlugin extends CordovaPlugin {
                 if (action.equals(NfcAdapter.ACTION_NDEF_DISCOVERED)) {
                     Ndef ndef = Ndef.get(tag);
                     fireNdefEvent(NDEF_MIME, ndef, messages);
-
-                } /*else if (action.equals(NfcAdapter.ACTION_TECH_DISCOVERED)) {
+                } else if (action.equals(NfcAdapter.ACTION_TECH_DISCOVERED)) {
                     for (String tagTech : tag.getTechList()) {
                         Log.d(TAG, tagTech);
                         if (tagTech.equals(NdefFormatable.class.getName())) {
                             fireNdefFormatableEvent(tag);
                         } else if (tagTech.equals(Ndef.class.getName())) { //
                             Ndef ndef = Ndef.get(tag);
+                            Log.d(TAG, "Ndef null check : "+ndef);
+                            
+                         
+
+                            // get NDEF message details
+                           /* NdefMessage ndefMesg = ndef.getCachedNdefMessage();
+                            NdefRecord[] ndefRecords = ndefMesg.getRecords();
+                            int len = ndefRecords.length;
+                            String[] recTypes = new String[len];     // will contain the NDEF record types
+                            for (int i = 0; i < len; i++) {
+                              recTypes[i] = new String(ndefRecords[i].getType());
+                              
+                              byte[] mesg = ndefRecords[i].getPayload();
+                              try {
+								Log.d("TAG","Record : "+new String(mesg, "UTF-8"));
+							} catch (UnsupportedEncodingException e) {
+								e.printStackTrace();
+							}
+                            }*/
+                            
+                            
                             fireNdefEvent(NDEF, ndef, messages);
                         }
                     }
-                }*/
+                    /*   Log.d("Ashray","calling RI");
+                   resolveIntent(intent); */
+                }
 
                 if (action.equals(NfcAdapter.ACTION_TAG_DISCOVERED)) {
                     fireTagEvent(tag);
@@ -395,49 +419,59 @@ public class NfcPlugin extends CordovaPlugin {
             }
 
             void resolveIntent(Intent intent) {
+            	 Log.d(TAG, "Starting RI");
                 // 1) Parse the intent and get the action that triggered this intent
                 String action = intent.getAction();
+                Log.d(TAG, "Got intent's action : "+action);
                 // 2) Check if it was triggered by a tag discovered interruption.
                 if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
                     //  3) Get an instance of the TAG from the NfcAdapter
                     Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+                    Log.d(TAG, "Got tagFromIntent : "+tagFromIntent);
                     // 4) Get an instance of the Mifare classic card from this TAG intent
                     MifareClassic mfc = MifareClassic.get(tagFromIntent);
+                    Log.d(TAG, "Instance of Mifare Classic card : "+mfc);
                     byte[] data;
                     
                     try {       //  5.1) Connect to card 
                     mfc.connect();
+                    Log.d(TAG, "Connected to card");
                     boolean auth = false;
                     String cardData = null;
                     // 5.2) and get the number of sectors this card has..and loop thru these sectors
                     int secCount = mfc.getSectorCount();
+                    Log.d(TAG, "No of sectors : "+secCount);
                     int bCount = 0;
                     int bIndex = 0;
                     for(int j = 0; j < secCount; j++){
                         // 6.1) authenticate the sector
-                        auth = mfc.authenticateSectorWithKeyA(j, MifareClassic.KEY_DEFAULT);
+                        auth = mfc.authenticateSectorWithKeyA(j, MifareClassic.KEY_NFC_FORUM);
                         if(auth){
+                        	Log.d(TAG, "If auth passed");
                             // 6.2) In each sector - get the block count
                             bCount = mfc.getBlockCountInSector(j);
+                            Log.d(TAG, "Block count : "+bCount);
                             bIndex = 0;
                             for(int i = 0; i < bCount; i++){
                                 bIndex = mfc.sectorToBlock(j);
                                 // 6.3) Read the block
                                 data = mfc.readBlock(bIndex);    
+                                Log.d(TAG, "Data : "+data);
                                 // 7) Convert the data into a string from Hex format.                
-                                Log.i(TAG, getHexString(data));
+                                Log.i(TAG, convertHexToString(getHexString(data)));
                                 
                                 fireMifareTagEvent("MIFARE", getHexString(data));
                                 bIndex++;
                             }
                         }else{ // Authentication failed - Handle it
-                            
+                        	Log.d(TAG, "Auth failed");
                         }
                     }    
                 }catch (IOException e) { 
                         Log.e(TAG, e.getLocalizedMessage());
                     }
             }// End of method
+                Log.d(TAG, "Ending RI");
         }
 
 		
@@ -578,4 +612,25 @@ public class NfcPlugin extends CordovaPlugin {
         "e.tag = {1};\n" +
         "document.dispatchEvent(e);";
 
+    public String convertHexToString(String hex){
+    	 
+    	   StringBuilder sb = new StringBuilder();
+    	   StringBuilder temp = new StringBuilder();
+    	 
+    	   //49204c6f7665204a617661 split into two characters 49, 20, 4c...
+    	   for( int i=0; i<hex.length()-1; i+=2 ){
+    	 
+    	       //grab the hex in pairs
+    	       String output = hex.substring(i, (i + 2));
+    	       //convert hex to decimal
+    	       int decimal = Integer.parseInt(output, 16);
+    	       //convert the decimal to character
+    	       sb.append((char)decimal);
+    	 
+    	       temp.append(decimal);
+    	   }
+    	   System.out.println("Decimal : " + temp.toString());
+    	 
+    	   return sb.toString();
+    	  }
 }
