@@ -21,7 +21,6 @@ var firstName="";
 var doctorId="";
 var tagPage=0;
 var utcOffset="";
-var navFlag=0;
 
 Ext.Loader.setConfig({
     enabled: true,

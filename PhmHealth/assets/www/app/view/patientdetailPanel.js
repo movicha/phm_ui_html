@@ -467,7 +467,6 @@ Ext.define('MyApp.view.patientdetailPanel', {
     onMybutton1Tap2: function(button, e, options) {
         console.log('Clicked on a Tagin');
         tagPage=1;
-        navFlag=1;
         Ext.getCmp('patientdetailPanel').setMasked(
                 {
                    xtype:'loadmask',

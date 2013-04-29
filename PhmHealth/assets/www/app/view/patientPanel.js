@@ -352,7 +352,6 @@ Ext.define('MyApp.view.patientPanel', {
             console.dir("button");
             tagPage=0;
             
-            navFlag=1;
                       
             uniqueId=e.getTarget('.tagin').name;
             

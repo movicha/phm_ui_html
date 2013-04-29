@@ -663,8 +663,6 @@ var app = {
 	    },
        onNdef: function (nfcEvent) {
 	       
-    	   if(navFlag==1)
-          {
     	   
     	   if(tagFlag==0)
     	  {	   
@@ -696,7 +694,7 @@ var app = {
 	       {
 	    	  if(id==patientDetails[key].patientid)*/
 	        
-	          if(id.trim()==tplPatientId.trim())
+	          if(id==tplPatientId)
 	    		  
 	    	  flag=1;	  
 	       /*}*/
@@ -737,7 +735,7 @@ var app = {
 	        else
 	       { 	
    	        
-   	        if(id.trim() == ndefRecord.trim())
+   	        if(id == ndefRecord)
    	        	{
    	        	 console.log("Patient tag out successful");
    	        	 app.endEncounter(id);
@@ -749,11 +747,6 @@ var app = {
     		   
     	  }
     	 }
-        }
-    	   else
-    		   {
-    		   navigator.notification.alert("Please click on tag-in button and then swipe the card.", function() {}, "pHmHealth");
-    		   }
        },
 	   setPatient : function(id)
 	   {
@@ -817,7 +810,6 @@ var app = {
 	  },
 	  endEncounter : function(id)
 	  {
-		  navFlag=0;
 		  console.log(doctorId+"--"+id+"--"+visitId+"--"+duratn);
 		  Ext.Ajax.request ({ 
 		        
