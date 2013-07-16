@@ -1,0 +1,16 @@
+{
+    "type": "arraystore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "Notes",
+        "data": " [ { title: \"Evaluation Details\" },\r\n            { title: \"Billable Activity\"}\r\n            \r\n             ]",
+        "model": "Notes",
+        "storeId": "Notes"
+    },
+    "id": "ExtBox1-ext-gen24357",
+    "designerId": "1fc37c27-41cc-4edd-8f9b-f857f22c21bf"
+}

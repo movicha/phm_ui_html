@@ -1,0 +1,196 @@
+{
+    "type": "container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "LoginForm",
+        "designer|initialView": true,
+        "id": "loginForm",
+        "layout": "fit"
+    },
+    "id": "ExtBox1-ext-gen1918",
+    "designerId": "ba183de0-d879-4938-8a80-09ed59b3b844",
+    "cn": [
+        {
+            "type": "panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|userClassName": "MyPanel",
+                "layout": "vbox"
+            },
+            "designerId": "c5e1c5df-3a08-4f02-b67e-3aa16b166c33",
+            "cn": [
+                {
+                    "type": "panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 0,
+                        "designer|userClassName": "MyPanel1",
+                        "height": "50%"
+                    },
+                    "designerId": "e7fb0720-bea7-4d7f-9629-60e4b43ca38e",
+                    "cn": [
+                        {
+                            "type": "component",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|userClassName": "MyComponent",
+                                "centered": true,
+                                "html": "<img src=\"images/high/logo.png\" />"
+                            },
+                            "designerId": "16fe0e85-fa88-441f-b0fe-194190672935"
+                        }
+                    ]
+                },
+                {
+                    "type": "panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 1,
+                        "designer|userClassName": "MyPanel1",
+                        "style": ""
+                    },
+                    "designerId": "481142c1-1ac5-4aad-a8e0-8ec729da295d",
+                    "cn": [
+                        {
+                            "type": "panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|userClassName": "MyPanel3",
+                                "padding": null,
+                                "style": "background:none;margin-top:10%;",
+                                "hideOnMaskTap": false,
+                                "layout": "vbox",
+                                "modal": null
+                            },
+                            "designerId": "321e4618-2378-466d-96bd-36d95385c20a",
+                            "cn": [
+                                {
+                                    "type": "formpanel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "designer|userClassName": "MyFormPanel",
+                                        "height": 45,
+                                        "style": "margin-bottom:10px;",
+                                        "scrollable": [
+                                            "false"
+                                        ]
+                                    },
+                                    "designerId": "bc6d5d09-2867-4a0b-b74d-742a3edbbf22",
+                                    "cn": [
+                                        {
+                                            "type": "passwordfield",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|userClassName": "MyPasswordField",
+                                                "height": null,
+                                                "id": "pass",
+                                                "maxHeight": "",
+                                                "minHeight": "",
+                                                "style": "margin-left:auto;margin-right:auto;",
+                                                "width": 300,
+                                                "label": "Password",
+                                                "labelCls": "labelbg",
+                                                "labelWidth": 100,
+                                                "name": "password",
+                                                "autoCorrect": false,
+                                                "maxLength": 15,
+                                                "placeHolder": "",
+                                                "readOnly": false
+                                            },
+                                            "designerId": "8aa2fb3e-7596-4554-bc9d-d75fcff7b946"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|userClassName": "MyButton",
+                                        "designer|userAlias": "mybutton",
+                                        "cls": "gradient",
+                                        "itemId": "mybutton",
+                                        "left": "",
+                                        "style": "margin-left:auto;margin-right:auto;",
+                                        "styleHtmlContent": true,
+                                        "ui": "forward",
+                                        "width": 80,
+                                        "badgeText": null,
+                                        "scope": [
+                                            "this"
+                                        ],
+                                        "text": "LOG IN"
+                                    },
+                                    "designerId": "3a834eea-439e-4c5b-ba27-80c6b2645ced",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|userClassName": "onMybuttonTap",
+                                                "fn": "onMybuttonTap",
+                                                "implHandler": [
+                                                    "\r",
+                                                    "\r",
+                                                    "console.log(\"newNoteCommanddcdc\");\r",
+                                                    "var paneltab = Ext.create('MyApp.view.MainTabPanel');\r",
+                                                    "Ext.getCmp('loginForm').destroy();\r",
+                                                    "Ext.Viewport.add(paneltab);\r",
+                                                    ""
+                                                ],
+                                                "delay": null,
+                                                "single": false,
+                                                "name": "tap"
+                                            },
+                                            "designerId": "fb5637de-7cbb-4963-98dc-9dec507d108d"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

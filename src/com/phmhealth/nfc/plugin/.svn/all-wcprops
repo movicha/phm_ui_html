@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/phmhealth/!svn/ver/9/trunk/ThinkNFC/src/com/chariotsolutions/nfc/plugin
+END
+NfcPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/phmhealth/!svn/ver/5/trunk/ThinkNFC/src/com/chariotsolutions/nfc/plugin/NfcPlugin.java
+END
+TagWriteException.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/phmhealth/!svn/ver/9/trunk/ThinkNFC/src/com/chariotsolutions/nfc/plugin/TagWriteException.java
+END
+Util.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/phmhealth/!svn/ver/5/trunk/ThinkNFC/src/com/chariotsolutions/nfc/plugin/Util.java
+END
